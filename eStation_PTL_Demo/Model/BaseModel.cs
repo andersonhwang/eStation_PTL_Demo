@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace eStation_PTL_Demo.Model
 {
+    /// <summary>
+    /// Base model
+    /// </summary>
     internal class BaseModel
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void NotifyPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

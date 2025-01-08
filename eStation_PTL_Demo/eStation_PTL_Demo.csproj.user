@@ -7,7 +7,27 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\ucApConnect.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ucApInfor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ucRadiButtonList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ucApConnect.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ucApInfor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ucRadiButtonList.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

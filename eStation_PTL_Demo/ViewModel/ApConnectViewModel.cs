@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace eStation_PTL_Demo.ViewModel
 {
-    internal class BaseViewModel
+    /// <summary>
+    /// AP connect
+    /// </summary>
+    internal class ApConnectViewModel : ViewModelBase
     {
+
     }
 }

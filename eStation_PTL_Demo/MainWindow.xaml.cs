@@ -20,5 +20,15 @@ namespace eStation_PTL_Demo
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+
+        }
     }
 }

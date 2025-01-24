@@ -1,11 +1,5 @@
-﻿using eStation_PTL_Demo.Model;
-using System;
-using System.Collections.Generic;
+﻿using eStation_PTL_Demo.Enumerator;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace eStation_PTL_Demo.ViewModel
@@ -49,10 +43,7 @@ namespace eStation_PTL_Demo.ViewModel
         /// <summary>
         /// Basic constructor
         /// </summary>
-        public ViewModelBase()
-        {
-            Worker.Instance.Register(ApStatusHandler);
-        }
+        public ViewModelBase() { }
 
         /// <summary>
         /// Ap status handler
@@ -62,7 +53,7 @@ namespace eStation_PTL_Demo.ViewModel
         /// <param name="count"></param>
         public void ApStatusHandler(ApStatus status, int cmd, int count)
         {
-            IsConnect = status is ApStatus.Online or ApStatus.Receive or ApStatus.Working;
+            IsConnect = status is ApStatus.Online or ApStatus.Working;
         }
 
         /// <summary>
@@ -70,7 +61,7 @@ namespace eStation_PTL_Demo.ViewModel
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns>Yes</returns>
-        public bool CanSend(object parameter) => Worker.Instance.IsOnline;
+        public bool CanSend(object parameter) => true;
 
         /// <summary>
         /// Get color
@@ -96,14 +87,27 @@ namespace eStation_PTL_Demo.ViewModel
     }
 
     /// <summary>
+    /// Interface async command
+    /// </summary>
+    public interface IAsyncCommand : ICommand
+    {
+        /// <summary>
+        /// Execute async
+        /// </summary>
+        /// <param name="parameter">Parameter</param>
+        /// <returns>The task</returns>
+        Task ExecuteAsync(object parameter);
+    }
+
+    /// <summary>
     /// My command
     /// </summary>
-    /// <param name="execute"></param>
-    /// <param name="executeFunc"></param>
-    public class MyCommand(Action<object> execute, Func<object, bool> executeFunc) : ICommand
+    /// <param name="doExecute">Action execute</param>
+    /// <param name="canExecute">Function can execute</param>
+    public class MyCommand(Action<object> doExecute, Func<object, bool> canExecute) : ICommand
     {
-        private readonly Action<object> _execute = execute;
-        private readonly Func<object, bool> _executeFunc = executeFunc;
+        private readonly Action<object> _doExecute = doExecute;
+        private readonly Func<object, bool> _canExecute = canExecute;
         public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
@@ -117,12 +121,48 @@ namespace eStation_PTL_Demo.ViewModel
         /// <returns>Result</returns>
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return _canExecute(parameter ?? new object());
         }
 
+        /// <summary>
+        /// Do execute
+        /// </summary>
+        /// <param name="parameter">Parameter</param>
         public void Execute(object? parameter)
         {
-            _execute.Invoke(parameter ?? new object());
+            _doExecute.Invoke(parameter ?? new object());
+        }
+    }
+
+    /// <summary>
+    /// My async command
+    /// </summary>
+    /// <param name="doExecute">Action execute</param>
+    /// <param name="canExecute">Function can execute</param>
+    public class MyAsyncCommand(Func<object, Task> doExecute, Predicate<object> canExecute) : IAsyncCommand
+    {
+        private readonly Func<object, Task> _doExecute = doExecute;
+        private readonly Predicate<object> _canExecute = canExecute;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+        public Task ExecuteAsync(object parameter)
+        {
+            return _doExecute(parameter);
+        }
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute(parameter ?? new object());
+        }
+        public async void Execute(object parameter)
+        {
+            await ExecuteAsync(parameter);
+        }
+        protected void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }

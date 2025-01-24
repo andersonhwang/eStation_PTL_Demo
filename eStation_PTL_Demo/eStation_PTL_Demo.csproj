@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <Authors>Huang Hai Peng</Authors>
+    <Company>ETAG Technology Co., Ltd</Company>
+    <Product>eStation PTL Demo</Product>
+    <Description>A WPF demo of eStation PTL edition</Description>
+    <Copyright>ETAG Technology Co., Ltd</Copyright>
+    <PackageProjectUrl>https://github.com/andersonhwang/eStation_PTL_Demo</PackageProjectUrl>
+    <Title>eStation_Ptl_Demo</Title>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fleck" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="MQTTnet" Version="4.3.7.1207" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>

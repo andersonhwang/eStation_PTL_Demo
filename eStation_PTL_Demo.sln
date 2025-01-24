@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eStation_PTL_Demo", "eStation_PTL_Demo\eStation_PTL_Demo.csproj", "{91EC0143-930D-4828-8D92-C4BE803F3E15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{DCC2011A-D0AC-4AE5-86F3-87F3232E3DF1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91EC0143-930D-4828-8D92-C4BE803F3E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91EC0143-930D-4828-8D92-C4BE803F3E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91EC0143-930D-4828-8D92-C4BE803F3E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91EC0143-930D-4828-8D92-C4BE803F3E15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC2011A-D0AC-4AE5-86F3-87F3232E3DF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC2011A-D0AC-4AE5-86F3-87F3232E3DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC2011A-D0AC-4AE5-86F3-87F3232E3DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC2011A-D0AC-4AE5-86F3-87F3232E3DF1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57B323D4-34D1-4083-9BB2-51A0722C3748}
+	EndGlobalSection
+EndGlobal

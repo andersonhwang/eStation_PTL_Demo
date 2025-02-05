@@ -1,4 +1,5 @@
-﻿using eStation_PTL_Demo.Enumerator;
+﻿using eStation_PTL_Demo.Core;
+using eStation_PTL_Demo.Enumerator;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -10,11 +11,10 @@ namespace eStation_PTL_Demo.ViewModel
     public class ViewModelBase : INotifyPropertyChanged
     {
         private bool isConnect = false;
-        private int cmd = -1;
-        private int count = 0;
+        private bool isRun = false;
 
         /// <summary>
-        /// AP is conenctk
+        /// AP is connect
         /// </summary>
         public bool IsConnect
         {
@@ -23,45 +23,34 @@ namespace eStation_PTL_Demo.ViewModel
         }
 
         /// <summary>
-        /// Command
+        /// Send service is run
         /// </summary>
-        public int Cmd
+        public bool IsRun
         {
-            get => cmd;
-            set { cmd = value; NotifyPropertyChanged(nameof(Cmd)); }
-        }
-
-        /// <summary>
-        /// AP is conenctk
-        /// </summary>
-        public int Count
-        {
-            get => count;
-            set { count = value; NotifyPropertyChanged(nameof(count)); }
+            get => isRun;
+            set { isRun = value; NotifyPropertyChanged(nameof(IsRun)); }
         }
 
         /// <summary>
         /// Basic constructor
         /// </summary>
-        public ViewModelBase() { }
+        public ViewModelBase()
+        {
+            SendService.Instance.Register(ApStatusHandler);
+        }
 
         /// <summary>
         /// Ap status handler
         /// </summary>
         /// <param name="status"></param>
-        /// <param name="cmd"></param>
-        /// <param name="count"></param>
-        public void ApStatusHandler(ApStatus status, int cmd, int count)
-        {
-            IsConnect = status is ApStatus.Online or ApStatus.Working;
-        }
+        public void ApStatusHandler(ApStatus status) => IsConnect = status is ApStatus.Online or ApStatus.Working;
 
         /// <summary>
         /// Can send
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns>Yes</returns>
-        public bool CanSend(object parameter) => true;
+        public bool CanSend(object parameter) => IsConnect;
 
         /// <summary>
         /// Get color
@@ -82,6 +71,10 @@ namespace eStation_PTL_Demo.ViewModel
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        /// <summary>
+        /// Notify property changed
+        /// </summary>
+        /// <param name="propertyName">Property name</param>
         public void NotifyPropertyChanged(string propertyName)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

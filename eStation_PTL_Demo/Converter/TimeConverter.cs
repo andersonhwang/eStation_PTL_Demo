@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eStation_PTL_Demo.Converter
 {
-    class TimeConverter
+    internal class TimeConverter
     {
     }
 }

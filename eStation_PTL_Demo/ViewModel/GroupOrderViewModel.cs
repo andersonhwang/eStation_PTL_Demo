@@ -7,7 +7,7 @@ namespace eStation_PTL_Demo.ViewModel
 {
     public class GroupOrderViewModel : ViewModelBase
     {
-        TagGroup group = new(string.Empty);
+        private TagGroup group = new(string.Empty);
         public TagGroup Group
         {
             get => group;
@@ -31,7 +31,15 @@ namespace eStation_PTL_Demo.ViewModel
         {
             await SendService.Instance.Send(new GroupOrder
             {
-                
+                Items =
+                [
+                    new GroupOrderItem {
+                        Beep = Group.Beep,
+                        Color = GetColor(Group.R, Group.G, Group.B),
+                        Group = Group.Bind
+                    }
+                ],
+                Time = 0
             });
         }
 
@@ -41,7 +49,14 @@ namespace eStation_PTL_Demo.ViewModel
         /// <param name="parameter"></param>
         public static async Task GroupStop(object parameter)
         {
-            await SendService.Instance.Send(new GroupOrder());
+            await SendService.Instance.Send(new GroupOrder
+            {
+                Items =
+                [
+                    new GroupOrderItem()
+                ],
+                Time = 0
+            });
         }
     }
 }

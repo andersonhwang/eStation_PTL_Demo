@@ -3,7 +3,7 @@
     /// <summary>
     /// Bind
     /// </summary>
-    public class Bind : BaseEntity, ITag
+    public class Bind : SequenceEntity, ITag
     {
         /// <summary>
         /// Items

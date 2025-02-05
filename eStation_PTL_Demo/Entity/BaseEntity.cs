@@ -12,7 +12,18 @@
         /// <summary>
         /// Token
         /// </summary>
-        public int Token { get; set; } = 0;
+        public string Token { get; set; } = string.Empty;
+    }
+
+    /// <summary>
+    /// Sequence entity base
+    /// </summary>
+    public class SequenceEntity : BaseEntity
+    {
+        /// <summary>
+        /// Sequence
+        /// </summary>
+        public int Sequence { get; set; } = 0;
     }
 
     /// <summary>

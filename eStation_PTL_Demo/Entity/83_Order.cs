@@ -3,7 +3,7 @@
     /// <summary>
     /// Ptl order
     /// </summary>
-    internal class Order : BaseEntity
+    internal class Order : SequenceEntity
     {
         /// <summary>
         /// LED light flashing times

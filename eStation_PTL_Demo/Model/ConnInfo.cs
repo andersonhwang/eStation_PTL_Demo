@@ -1,4 +1,6 @@
-﻿namespace eStation_PTL_Demo.Model
+﻿using System.IO;
+
+namespace eStation_PTL_Demo.Model
 {
     /// <summary>
     /// Connect information
@@ -7,8 +9,8 @@
     {
         private int _port = 9071;
         private ConnType _connType = ConnType.MQTT;
-        private string _userName = string.Empty;
-        private string _password = string.Empty;
+        private string _userName = "test";
+        private string _password = "123456";
         private string _token = string.Empty;
         private bool _securtiy = false;
         private string _certificate = string.Empty;
@@ -40,7 +42,11 @@
         /// <summary>
         /// Certificate path
         /// </summary>
-        public string Certificate { get => _certificate; set { _certificate = value; NotifyPropertyChanged(nameof(Certificate)); } }
+        public string Certificate { get => _certificate; set { _certificate = value; NotifyPropertyChanged(nameof(CertificateName)); } }
+        /// <summary>
+        /// Certificate name
+        /// </summary>
+        public string CertificateName { get => File.Exists(_certificate) ? Path.GetFileName(_certificate) : string.Empty; }
         /// <summary>
         /// Certificate key
         /// </summary>

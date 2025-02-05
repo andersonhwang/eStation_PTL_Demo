@@ -3,7 +3,7 @@
     /// <summary>
     /// Ptl group order
     /// </summary>
-    public class GroupOrder : BaseEntity
+    public class GroupOrder : SequenceEntity
     {
         /// <summary>
         /// LED light flashing times

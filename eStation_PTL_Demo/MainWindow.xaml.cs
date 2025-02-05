@@ -1,13 +1,4 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace eStation_PTL_Demo
 {
@@ -23,7 +14,8 @@ namespace eStation_PTL_Demo
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            debugRequest.SetDebugInfo(0);
+            debugResponse.SetDebugInfo(1);
         }
 
         private void Window_Closed(object sender, EventArgs e)

@@ -3,7 +3,7 @@
     /// <summary>
     /// OTA entity
     /// </summary>
-    internal class OTA : BaseEntity
+    internal class OTA : SequenceEntity
     {
         /// <summary>
         /// Type, 0-AP, 1-PTL
@@ -20,7 +20,7 @@
         /// <summary>
         /// Firmware data
         /// </summary>
-        public byte[] Firmware { get; init; } = Array.Empty<byte>();
+        public byte[] Firmware { get; init; } = [];
 
         /// <summary>
         /// Default constructor

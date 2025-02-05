@@ -7,10 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="TagList.xaml.cs">
+    <Compile Update="ConfigWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\ucApConfig.xaml.cs">
+    <Compile Update="FirmwareWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TagList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ucApConnect.xaml.cs">
@@ -19,10 +22,7 @@
     <Compile Update="View\ucApInfor.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\ucDebugRequest.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="View\ucDebugResponse.xaml.cs">
+    <Compile Update="View\ucDebug.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ucGroupOrder.xaml.cs">
@@ -37,15 +37,21 @@
     <Compile Update="View\ucRadiButtonList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="CertificateWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="ConfigWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="FirmwareWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="TagList.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\ucApConfig.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ucApConnect.xaml">
@@ -54,10 +60,7 @@
     <Page Update="View\ucApInfor.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="View\ucDebugRequest.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\ucDebugResponse.xaml">
+    <Page Update="View\ucDebug.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ucGroupOrder.xaml">
@@ -70,6 +73,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ucRadiButtonList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CertificateWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

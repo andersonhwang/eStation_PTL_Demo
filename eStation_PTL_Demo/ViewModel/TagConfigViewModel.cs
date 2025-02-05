@@ -6,7 +6,7 @@ namespace eStation_PTL_Demo.ViewModel
 {
     public class TagConfigViewModel : ViewModelBase
     {
-        TagConfig config = new();
+        private TagConfig config = new();
         /// <summary>
         /// Tag config
         /// </summary>

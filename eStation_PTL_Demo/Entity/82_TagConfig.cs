@@ -1,6 +1,9 @@
 ﻿namespace eStation_PTL_Demo.Entity
 {
-    public class TagConfig : BaseEntity
+    /// <summary>
+    /// Tag config entity
+    /// </summary>
+    public class TagConfig : SequenceEntity
     {
         /// <summary>
         /// Start tag ID

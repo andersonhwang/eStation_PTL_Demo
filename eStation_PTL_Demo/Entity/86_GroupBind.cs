@@ -3,7 +3,7 @@
     /// <summary>
     /// Group bind
     /// </summary>
-    public class GroupBind : BaseEntity, ITag
+    public class GroupBind : SequenceEntity, ITag
     {
         /// <summary>
         /// Group code

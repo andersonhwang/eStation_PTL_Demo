@@ -11,10 +11,5 @@ namespace eStation_PTL_Demo.View
         {
             InitializeComponent();
         }
-
-        private void lnkX509_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-        }
     }
 }

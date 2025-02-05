@@ -1,4 +1,6 @@
-﻿namespace eStation_PTL_Demo.Entity
+﻿using eStation_PTL_Demo.Model;
+
+namespace eStation_PTL_Demo.Entity
 {
     /// <summary>
     /// AP Infor
@@ -24,15 +26,11 @@
         /// <summary>
         /// Client type
         /// </summary>
-        public ConnType ClientType { get; set; } = ConnType.MQTT;
-        /// <summary>
-        /// Version
-        /// </summary>
-        public string Version { get; set; } = string.Empty; 
+        public int ClientType { get; set; } = 0;
         /// <summary>
         /// App version
         /// </summary>
-        public int AppVersion { get; set; } = 0;
+        public int AppVersion { get; set; } = 1;
         /// <summary>
         /// Mod version
         /// </summary>
@@ -45,6 +43,10 @@
         /// Free space
         /// </summary>
         public int FreeSpace { get; internal set; } = 0;
+        /// <summary>
+        /// Current config
+        /// </summary>
+        public ApConfigB ConfigB { get; set; } = new ApConfigB();
         /// <summary>
         /// Default cosntructor
         /// </summary>

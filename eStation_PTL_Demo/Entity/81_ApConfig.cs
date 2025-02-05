@@ -1,9 +1,11 @@
-﻿namespace eStation_PTL_Demo.Entity
+﻿using eStation_PTL_Demo.Model;
+
+namespace eStation_PTL_Demo.Entity
 {
     /// <summary>
-    /// AP configuration with base entityt
+    /// AP configuration with sequence entity 
     /// </summary>
-    internal class ApConfig : BaseEntity
+    public class ApConfig : SequenceEntity
     {
         /// <summary>
         /// AP configuration

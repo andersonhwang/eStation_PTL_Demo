@@ -8,11 +8,11 @@ namespace eStation_PTL_Demo.Model
     /// <param name="id">Tag ID</param>
     public class TagGroup(string id) : TagBasic(id)
     {
-        int time = 0;
-        int bind = 0;
-        TagStatus status = TagStatus.Init;
-        DateTime? lastSend = null;
-        DateTime? lastReceive = null;
+        private int time = 0;
+        private int bind = 0;
+        private TagStatus status = TagStatus.Init;
+        private DateTime? lastSend = null;
+        private DateTime? lastReceive = null;
         protected int sendCount = 0;
         protected int receiveCount = 0;
 

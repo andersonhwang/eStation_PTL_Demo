@@ -5,7 +5,6 @@
     /// </summary>
     internal class ApResponse : BaseEntity
     {
-
         /// <summary>
         /// Default constructor
         /// </summary>

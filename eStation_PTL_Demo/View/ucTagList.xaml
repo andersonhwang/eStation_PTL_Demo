@@ -17,6 +17,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Right" FlowDirection="LeftToRight" Orientation="Horizontal">
+            <CheckBox Content="自动注册" IsChecked="{Binding DataContext.Header.AutoRegister, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
             <CheckBox Content="只看数据" IsChecked="{Binding DataContext.Header.OnlyData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
             <Button Content="随机一下" IsEnabled="{Binding IsConnect}" CommandParameter="R" Command="{Binding DataContext.CmdRandomTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
             <TextBox Width="50" Text="{Binding Header.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
@@ -123,7 +124,7 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Status, Converter={StaticResource TagStatusConverter}, Mode=OneWay}" Style="{StaticResource tbStatus}"/>
+                                <TextBlock Text="{Binding Status, Converter={StaticResource TagStatusConverter}}" Style="{StaticResource tbStatus}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -1,4 +1,5 @@
 ﻿using eStation_PTL_Demo.Enumerator;
+using eStation_PTL_Demo.Helper;
 using eStation_PTL_Demo.Model;
 using MQTTnet;
 using MQTTnet.Protocol;
@@ -33,19 +34,19 @@ namespace eStation_PTL_Demo.Core
         {
             try
             {
-                var builder = new MqttServerOptionsBuilder();
+                var builder = new MqttServerOptionsBuilder()
+                        .WithDefaultEndpoint();
                 if (Connection.Security)
                 {
                     builder = builder
                         .WithEncryptedEndpoint()
                         .WithEncryptedEndpointPort(Connection.Port)
-                        .WithEncryptionCertificate(GetCertificate2(Connection))
+                        .WithEncryptionCertificate(FileHelper.GetCertificate(Connection.Certificate, Connection.Key))
                         .WithEncryptionSslProtocol(SslProtocols.Tls12);
                 }
                 else
                 {
                     builder = builder
-                        .WithDefaultEndpoint()
                         .WithDefaultEndpointPort(Connection.Port);
                 }
                 var options = builder.Build();
@@ -54,6 +55,8 @@ namespace eStation_PTL_Demo.Core
                 mqttServer.ClientDisconnectedAsync += ClientDisconnectedAsync;
                 mqttServer.ValidatingConnectionAsync += ValidatingConnectionAsync;
                 mqttServer.InterceptingPublishAsync += InterceptingPublishAsync;
+                mqttServer.StartAsync();
+                Log.Information("MQTT_RUN_OK");
                 return true;
             }
             catch (Exception ex)
@@ -68,10 +71,10 @@ namespace eStation_PTL_Demo.Core
         /// </summary>
         /// <param name="arg"></param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
         private Task ClientConnectedAsync(ClientConnectedEventArgs arg)
         {
             ApStatusHandler(arg.ClientId, ApStatus.Connecting);
+            Log.Information($"{arg.ClientId}({arg.Endpoint}) Connected");
             return Task.CompletedTask;
         }
 
@@ -83,6 +86,8 @@ namespace eStation_PTL_Demo.Core
         private Task ClientDisconnectedAsync(ClientDisconnectedEventArgs arg)
         {
             ApStatusHandler(arg.ClientId, ApStatus.Offline);
+            Log.Information($"{arg.ClientId}({arg.Endpoint}) Disconnected");
+            if (Clients.TryGetValue(arg.ClientId, out Ap? value)) value.Status = ApStatus.Offline;
             return Task.CompletedTask;
         }
 
@@ -100,9 +105,12 @@ namespace eStation_PTL_Demo.Core
             if (arg.ReasonCode == MqttConnectReasonCode.Success)
             {
                 mqttServer.SubscribeAsync(arg.ClientId, $"/estation/{arg.ClientId}/send");
-                //Clients.Add((true, arg.ClientId));
+                ApStatusHandler(arg.ClientId, ApStatus.Online);
+                if (Clients.TryGetValue(arg.ClientId, out Ap? value)) value.Status = ApStatus.Online;
+                else Clients.Add(arg.ClientId, new Ap { ID = arg.ClientId, Status = ApStatus.Online, IP = arg.Endpoint });
             }
 
+            Log.Information($"{arg.ClientId}({arg.Endpoint}) validating connection:{arg.ReasonCode}");
             return Task.CompletedTask;
         }
 
@@ -135,12 +143,10 @@ namespace eStation_PTL_Demo.Core
                 if (client.Value.Status != ApStatus.Online) return SendResult.Offline;
 
                 var mqtt = new MqttApplicationMessageBuilder()
-                    .WithTopic("/estation/recv")
-                    .WithTopicAlias(ushort.Parse(client.Key))
+                    .WithTopic($"/estation/{client.Key}/recv")
                     .WithPayload(JsonSerializer.Serialize(t))
                     .Build();
-                await mqttServer.InjectApplicationMessage(
-                    new InjectedMqttApplicationMessage(mqtt) { SenderClientId = client.Key });
+                await mqttServer.InjectApplicationMessage(new InjectedMqttApplicationMessage(mqtt));
                 return SendResult.Success;
             }
             catch (Exception ex)

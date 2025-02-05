@@ -8,15 +8,15 @@ namespace eStation_PTL_Demo.Model
     /// <param name="id">Tag ID</param>
     public class Tag(string id) : TagBasic(id)
     {
-        int? version = null;
-        int? sequence = null;
-        int? rfPower = null;
-        int? battery = null;
-        TagStatus status = TagStatus.Init;
-        DateTime? lastSend = null;
-        DateTime? lastReceive = null;
-        DateTime? lastHeartbeat = null;
-        DateTime? lastKey = null;
+        private int? version = null;
+        private int? sequence = null;
+        private int? rfPower = null;
+        private int? battery = null;
+        private TagStatus status = TagStatus.Init;
+        private DateTime? lastSend = null;
+        private DateTime? lastReceive = null;
+        private DateTime? lastHeartbeat = null;
+        private DateTime? lastKey = null;
         protected int heartbeatCount = 0;
         protected int keyCount = 0;
         protected int sendCount = 0;

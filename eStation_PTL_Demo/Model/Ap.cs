@@ -2,32 +2,38 @@
 
 namespace eStation_PTL_Demo.Model
 {
-    internal class Ap : BaseModel
+    /// <summary>
+    /// AP
+    /// </summary>
+    public class Ap : BaseModel
     {
-        string id = "-";
-        string alias = "-";
-        string ip = "-";
-        string mac = "-";
-        string appVersion = "-";
-        string modVersion = "-";
-        ApStatus status = ApStatus.Init;
-        DateTime? lastOnline = null;
-        DateTime? lastOffline = null;
-        DateTime? lastHeartbeat = null;
-        DateTime? lastSend = null;
-        DateTime? lastReceive = null;
-        int code = -1;
-        int totalCount = 0;
-        int sendCount = 0;
-        bool auto = true;
+        private string id = "-";
+        private string alias = "-";
+        private string ip = "-";
+        private string mac = "-";
+        private string appVersion = "-";
+        private string modVersion = "-";
+        private ApStatus status = ApStatus.Init;
+        private DateTime? lastOnline = null;
+        private DateTime? lastOffline = null;
+        private DateTime? lastHeartbeat = null;
+        private DateTime? lastSend = null;
+        private DateTime? lastReceive = null;
+        private int totalCount = 0;
+        private int sendCount = 0;
+
         /// <summary>
         /// ID
         /// </summary>
-        public string ID { get => id; set { id = value; NotifyPropertyChanged(nameof(ID)); } }
+        public string ID { get => id; set { id = value; NotifyPropertyChanged(nameof(ID)); NotifyPropertyChanged(nameof(IDDisplay)); } }
+        /// <summary>
+        /// ID for display
+        /// </summary>
+        public string IDDisplay => (string.IsNullOrEmpty(Alias) || ID.Equals(Alias)) ? ID : $"{ID}({Alias})";
         /// <summary>
         /// Alias
         /// </summary>
-        public string Alias { get => alias; set { alias = value; NotifyPropertyChanged(nameof(Alias)); } }
+        public string Alias { get => alias; set { alias = value; NotifyPropertyChanged(nameof(Alias)); NotifyPropertyChanged(nameof(IDDisplay)); } }
         /// <summary>
         /// IP
         /// </summary>
@@ -47,7 +53,7 @@ namespace eStation_PTL_Demo.Model
         /// <summary>
         /// Status
         /// </summary>
-        public ApStatus Status { get => status; set { status = value; NotifyPropertyChanged(nameof(status)); } }
+        public ApStatus Status { get => status; set { status = value; NotifyPropertyChanged(nameof(Status)); } }
         /// <summary>
         /// Last send time
         /// </summary>
@@ -68,7 +74,6 @@ namespace eStation_PTL_Demo.Model
         /// Last offline time
         /// </summary>
         public DateTime? LastOffline { get => lastOffline; set { lastOffline = value; NotifyPropertyChanged(nameof(LastOffline)); } }
-        public int Code { get => code; set { code = value; NotifyPropertyChanged(nameof(Code)); } }
         /// <summary>
         /// Total count
         /// </summary>
@@ -77,6 +82,10 @@ namespace eStation_PTL_Demo.Model
         /// Send count
         /// </summary>
         public int SendCount { get => sendCount; set { sendCount = value; NotifyPropertyChanged(nameof(SendCount)); } }
-        public bool Auto { get => auto; set { auto = value; NotifyPropertyChanged(nameof(Auto)); } }
+
+        /// <summary>
+        /// AP config
+        /// </summary>
+        public ApConfigB ConfigB = new();
     }
 }

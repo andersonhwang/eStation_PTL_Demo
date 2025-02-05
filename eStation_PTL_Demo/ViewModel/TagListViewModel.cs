@@ -3,18 +3,20 @@ using eStation_PTL_Demo.Entity;
 using eStation_PTL_Demo.Enumerator;
 using eStation_PTL_Demo.Helper;
 using eStation_PTL_Demo.Model;
+using Serilog;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
 
 namespace eStation_PTL_Demo.ViewModel
 {
     internal class TagListViewModel : ViewModelBase
     {
-        readonly object _locker = new();
-        readonly string TagListPath = "TagList.txt";
+        private readonly object _locker = new();
+        private readonly string TagListPath = "TagList.txt";
         private Random Random;
         private CancellationTokenSource _tokenSource;
         private CancellationToken _token;
@@ -28,10 +30,25 @@ namespace eStation_PTL_Demo.ViewModel
         /// Tags list
         /// </summary>
         public ObservableCollection<Tag> Tags { get => tags; set { tags = value; NotifyPropertyChanged(nameof(Tags)); } }
+        /// <summary>
+        /// Command - select tags
+        /// </summary>
         public ICommand CmdSelectTags { get; set; }
+        /// <summary>
+        /// Command - random tags
+        /// </summary>
         public ICommand CmdRandomTags { get; set; }
+        /// <summary>
+        /// Command - send
+        /// </summary>
         public ICommand CmdSend { get; private set; }
+        /// <summary>
+        /// Command - auto send
+        /// </summary>
         public ICommand CmdAutoSend { get; private set; }
+        /// <summary>
+        /// Command - menu
+        /// </summary>
         public ICommand CmdMenu { get; private set; }
 
         /// <summary>
@@ -341,27 +358,45 @@ namespace eStation_PTL_Demo.ViewModel
         /// <param name="result">Task result</param>
         public void UpdateTaskResult(TaskResult result)
         {
-            foreach (var item in result.Items)
+            lock (_locker)
             {
-                //if (Header.OnlyData && (infor.reason != 1 && infor.reason != 4)) return;
-                var tag = Tags.FirstOrDefault(x => x.TagID.Equals(item.TagID));
-                if (tag is null) return;
-                switch (item.Type)
+                try
                 {
-                    case 0: tag.HeartbeatCount++; tag.LastHeartbeat = DateTime.Now; tag.Status = TagStatus.Heartbeat; break;
-                    case 1:
-                        tag.ReceiveCount++; tag.LastReceive = DateTime.Now;
-                        if ((tag.Status != TagStatus.Success) && (item.RfPower != -256)) Header.SuccsessCount++;
-                        tag.Status = item.RfPower == -256 ? TagStatus.Fail : TagStatus.Success;
-                        break;
-                    case 2: tag.KeyCount++; tag.LastKey = DateTime.Now; tag.Status = TagStatus.Key; break;
-                    case 3: tag.Status = TagStatus.GroupControl; tag.LastReceive = DateTime.Now; break;
-                    case 4: tag.Status = TagStatus.Duplicate; tag.LastReceive = DateTime.Now; break;
-                    default: break;
+                    foreach (var item in result.Items)
+                    {
+                        //if (Header.OnlyData && (infor.reason != 1 && infor.reason != 4)) return;
+                        var tag = Tags.FirstOrDefault(x => x.TagID.Equals(item.TagID));
+                        if (tag is null)
+                        {
+                            if (Header.AutoRegister)
+                            {
+                                tag = new Tag(item.TagID);
+                                Application.Current.Dispatcher.Invoke(() => Tags.Add(tag));
+                            }
+                            else return;
+                        }
+                        switch (item.DataType)
+                        {
+                            case 0: tag.HeartbeatCount++; tag.LastHeartbeat = DateTime.Now; tag.Status = TagStatus.Heartbeat; break;
+                            case 1:
+                                tag.ReceiveCount++; tag.LastReceive = DateTime.Now;
+                                if ((tag.Status != TagStatus.Success) && (item.RfPower != -256)) Header.SuccsessCount++;
+                                tag.Status = item.RfPower == -256 ? TagStatus.Fail : TagStatus.Success;
+                                break;
+                            case 2: tag.KeyCount++; tag.LastKey = DateTime.Now; tag.Status = TagStatus.Key; break;
+                            case 3: tag.Status = TagStatus.GroupControl; tag.LastReceive = DateTime.Now; break;
+                            case 4: tag.Status = TagStatus.Duplicate; tag.LastReceive = DateTime.Now; break;
+                            default: break;
+                        }
+                        tag.RfPower = item.RfPower;
+                        tag.Battery = item.Voltage;
+                        tag.Version = item.Version;
+                    }
                 }
-                tag.RfPower = item.RfPower;
-                tag.Battery = item.Voltage;
-                tag.Version = item.Version;
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Update_Task_Result_Error");
+                }
             }
         }
 

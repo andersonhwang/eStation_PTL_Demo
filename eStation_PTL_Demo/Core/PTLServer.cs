@@ -1,14 +1,11 @@
 ﻿using eStation_PTL_Demo.Entity;
 using eStation_PTL_Demo.Enumerator;
 using eStation_PTL_Demo.Model;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
 
 namespace eStation_PTL_Demo.Core
 {
     internal abstract class PTLServer
     {
-
         /// <summary>
         /// Connection information
         /// </summary>
@@ -46,14 +43,23 @@ namespace eStation_PTL_Demo.Core
         public abstract Task<SendResult> Send<T>(T t) where T : BaseEntity;
 
         /// <summary>
-        /// Get X509 certificate file
+        /// Get AP config
         /// </summary>
-        /// <param name="info">Connection infor</param>
-        /// <returns>X509 certificate</returns>
-        protected X509Certificate2 GetCertificate2(ConnInfo info)
+        /// <param name="id">AP ID</param>
+        /// <returns>AP config</returns>
+        public ApConfigB GetApConfig(string id)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), info.Certificate);
-            return X509Certificate2.CreateFromPemFile(path, info.Key);
+            if(Clients.ContainsKey(id)) return Clients[id].ConfigB;
+            return new ApConfigB();
+        }
+
+        /// <summary>
+        /// Update AP config
+        /// </summary>
+        /// <param name="apInfor">AP Infor</param>
+        public void UpdateApConfig(ApInfor apInfor)
+        {
+            if(Clients.ContainsKey(apInfor.ID)) Clients[apInfor.ID].ConfigB = apInfor.ConfigB;
         }
     }
 }

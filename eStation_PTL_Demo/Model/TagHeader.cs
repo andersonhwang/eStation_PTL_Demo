@@ -7,6 +7,7 @@
     public class TagHeader(string id) : TagBasic(id)
     {
         private bool autoTest = false;
+        private bool autoRegister = false;
         private bool onlyData = true;
         private int autoMode = 0;
         private int time = 10;
@@ -23,6 +24,10 @@
         /// Auto test display
         /// </summary>
         public string AutoTestDisplay { get => autoTest ? "停止测试" : "自动测试"; }
+        /// <summary>
+        /// Auto register
+        /// </summary>
+        public bool AutoRegister { get => autoRegister; set { autoRegister = value; NotifyPropertyChanged(nameof(AutoRegister)); } }
         /// <summary>
         /// Only data
         /// </summary>

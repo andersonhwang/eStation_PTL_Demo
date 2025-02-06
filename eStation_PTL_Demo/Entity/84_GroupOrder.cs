@@ -9,27 +9,26 @@
         /// LED light flashing times
         /// </summary>
         public int Time { get; set; } = 1;
-
         /// <summary>
-        /// Group order items
+        /// Start group code
         /// </summary>
-        public GroupOrderItem[] Items { get; set; } = [];
-
+        public int StartGroup { get; set; } = 0x00;
         /// <summary>
-        /// Default constructor
+        /// End group code
         /// </summary>
-        public GroupOrder() => Code = 0x84;
-    }
-
-    /// <summary>
-    /// Ptl group order item
-    /// </summary>
-    public class GroupOrderItem : ITagItem
-    {
+        public int EndGroup { get; set; } = 0xFF;
         /// <summary>
-        /// Group code
+        /// Start tag ID
         /// </summary>
-        public int Group { get; set; } = 0;
+        public string StartID { get; set; } = "00000000";
+        /// <summary>
+        /// End tag ID
+        /// </summary>
+        public string EndID { get; set; } = "FFFFFFFF";
+        /// <summary>
+        /// LED light flashing: True-Yes, False-No
+        /// </summary>
+        public bool Flashing { get; set; } = true;
         /// <summary>
         /// Beep
         /// </summary>
@@ -38,21 +37,10 @@
         /// Color 0-灭 1-蓝色 2-绿色 3-青色 4-红色 5-紫色 6-黄色 7-白色
         /// </summary>
         public int Color { get; set; } = 0;
-        /// <summary>
-        /// LED light flashing: True-Yes, False-No
-        /// </summary>
-        public bool Flashing { get; set; } = true;
-        /// <summary>
-        /// Get Ptl order item bytes
-        /// </summary>
-        /// <returns></returns>
-        public byte[] Bytes() => [(byte)Group, Byte()];
 
         /// <summary>
-        /// Get color byte
+        /// Default constructor
         /// </summary>
-        /// <returns>Color byte</returns>
-        private byte Byte()
-            => (byte)((Beep ? 0x08 : 0x00) | (Color == 0 ? 0x00 : Flashing ? 0xC0 : 0x40) | Color);
+        public GroupOrder() => Code = 0x84;
     }
 }

@@ -98,13 +98,13 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <CheckBox Content="闪烁" IsChecked="{Binding DataContext.Header.Blink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"
-                                  Command="{Binding DataContext.CmdSelectTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" CommandParameter="Blink">
+                            <CheckBox Content="闪烁" IsChecked="{Binding DataContext.Header.Flashing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"
+                                  Command="{Binding DataContext.CmdSelectTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" CommandParameter="Flashing">
                             </CheckBox>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding Blink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Select}"/>
+                                <CheckBox IsChecked="{Binding Flashing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Select}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

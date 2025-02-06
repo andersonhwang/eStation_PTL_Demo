@@ -25,9 +25,9 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="起始MAC"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="起始ID"/>
             <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Config.StartID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="终止MAC"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="终止ID"/>
             <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Config.EndID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="休眠间隔" ToolTip="低功耗休眠时间间隔，单位毫秒 ，1~65000，默认2000（2秒）"/>
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Config.SleepInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>

@@ -31,15 +31,14 @@ namespace eStation_PTL_Demo.ViewModel
         {
             await SendService.Instance.Send(new GroupOrder
             {
-                Items =
-                [
-                    new GroupOrderItem {
-                        Beep = Group.Beep,
-                        Color = GetColor(Group.R, Group.G, Group.B),
-                        Group = Group.Bind
-                    }
-                ],
-                Time = 0
+                Time = Group.Time,
+                Beep = Group.Beep,
+                Flashing = Group.Flashing,
+                Color = GetColor(Group.R, Group.G, Group.B),
+                StartGroup = Group.StartGroup,
+                EndGroup = Group.EndGroup,
+                StartID = Group.StartID,
+                EndID = Group.EndID,
             });
         }
 
@@ -47,15 +46,18 @@ namespace eStation_PTL_Demo.ViewModel
         /// Group send
         /// </summary>
         /// <param name="parameter"></param>
-        public static async Task GroupStop(object parameter)
+        public async Task GroupStop(object parameter)
         {
             await SendService.Instance.Send(new GroupOrder
             {
-                Items =
-                [
-                    new GroupOrderItem()
-                ],
-                Time = 0
+                Time = -1,
+                Beep = false,
+                Flashing = false,
+                Color = GetColor(false, false, false),
+                StartGroup = Group.StartGroup,
+                EndGroup = Group.EndGroup,
+                StartID = Group.StartID,
+                EndID = Group.EndID,
             });
         }
     }

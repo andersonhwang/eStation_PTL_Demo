@@ -99,7 +99,7 @@ namespace eStation_PTL_Demo.ViewModel
                     case "G": if (tag.Select) tag.G = Header.G; break;
                     case "B": if (tag.Select) tag.B = Header.B; break;
                     case "Beep": if (tag.Select) tag.Beep = Header.Beep; break;
-                    case "Blink": if (tag.Select) tag.Blink = Header.Blink; break;
+                    case "Flashing": if (tag.Select) tag.Flashing = Header.Flashing; break;
                 }
             }
         }
@@ -186,7 +186,7 @@ namespace eStation_PTL_Demo.ViewModel
                 {
                     TagID = tag.TagID,
                     Beep = tag.Beep,
-                    Flashing = tag.Blink,
+                    Flashing = tag.Flashing,
                     Color = GetColor(tag.R, tag.G, tag.B)
                 });
                 tag.Status = TagStatus.Sending;
@@ -293,11 +293,11 @@ namespace eStation_PTL_Demo.ViewModel
                 if (tag.Select)
                 {
                     var r = Random.Next(0x20);
-                    //if ((r & 0x10) == 0x10) tag.R = true;
-                    //if ((r & 0x08) == 0x08) tag.G = true;
-                    //if ((r & 0x04) == 0x04) tag.B = true;
-                    //if ((r & 0x02) == 0x02) tag.Beep = true;
-                    //if ((r & 0x01) == 0x01) tag.Blink = true;
+                    if ((r & 0x10) == 0x10) tag.R = true;
+                    if ((r & 0x08) == 0x08) tag.G = true;
+                    if ((r & 0x04) == 0x04) tag.B = true;
+                    if ((r & 0x02) == 0x02) tag.Beep = true;
+                    if ((r & 0x01) == 0x01) tag.Flashing = true;
                 }
             }
         }
@@ -391,6 +391,7 @@ namespace eStation_PTL_Demo.ViewModel
                         tag.RfPower = item.RfPower;
                         tag.Battery = item.Voltage;
                         tag.Version = item.Version;
+                        tag.Group = item.Group;
                     }
                 }
                 catch (Exception ex)
@@ -419,7 +420,7 @@ namespace eStation_PTL_Demo.ViewModel
                 tag.G =
                 tag.B =
             tag.Beep =
-            tag.Blink = false;
+            tag.Flashing = false;
             tag.LastSend =
             tag.LastHeartbeat =
             tag.LastKey = null;

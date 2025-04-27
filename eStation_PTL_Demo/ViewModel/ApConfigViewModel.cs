@@ -66,6 +66,10 @@ namespace eStation_PTL_Demo.ViewModel
             DialogResult = true;
         }
 
+        /// <summary>
+        /// Do cancel
+        /// </summary>
+        /// <param name="obj"></param>
         public void DoCancel(object obj)
         {
             DialogResult = true;

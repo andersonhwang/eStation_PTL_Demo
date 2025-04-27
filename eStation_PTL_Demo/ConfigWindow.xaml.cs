@@ -18,8 +18,7 @@ namespace eStation_PTL_Demo
             InitializeComponent();
 
             Owner = Application.Current.MainWindow;
-            var vm = DataContext as ApConfigViewModel;
-            if (vm != null) vm.Config = config;
+            if (DataContext is ApConfigViewModel vm) vm.Config = config;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) => Close();

@@ -9,7 +9,7 @@ namespace eStation_PTL_Demo.View
     /// Interaction logic for ucDebug.xaml
     /// </summary>
     public partial class ucDebug : UserControl
-    {
+    {                                
         public int DebugType { get; set; } = 0;
 
         public ucDebug()

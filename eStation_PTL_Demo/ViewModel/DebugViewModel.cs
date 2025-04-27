@@ -2,9 +2,7 @@
 using eStation_PTL_Demo.Helper;
 using eStation_PTL_Demo.Model;
 using System.Collections.ObjectModel;
-using System.Text.Json;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace eStation_PTL_Demo.ViewModel
 {

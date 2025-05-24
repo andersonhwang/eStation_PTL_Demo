@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <vm:ApInforViewModel/>
     </UserControl.DataContext>
-    <GroupBox Header="基站信息">
+    <GroupBox Header="AP Information">
         <Grid h:GridHelper.LineBrush="Black" h:GridHelper.ShowBorder="True" h:GridHelper.LineThickness="0.5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -34,29 +34,29 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="ID"/>
             <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding AP.IDDisplay, Mode=OneWay}" />
-            <Button Grid.Row="0" Grid.Column="2" Command="{Binding CmdConfig}" IsEnabled="{Binding IsConnect}" Content="配置"/>
+            <Button Grid.Row="0" Grid.Column="2" Command="{Binding CmdConfig}" IsEnabled="{Binding IsConnect}" Content="CONF"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Text="IP"/>
             <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AP.IP, Mode=OneWay}"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="MAC"/>
             <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AP.MAC, Mode=OneWay}" />
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="固件版本"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Firmware"/>
             <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding AP.AppVersion, Mode=OneWay}" />
             <Button Grid.Row="3" Grid.Column="2" Command="{Binding CmdOTA}" IsEnabled="{Binding IsConnect}" Content="OTA"/>
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="模组版本"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="MOD Version"/>
             <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AP.ModVersion, Mode=OneWay}" />
-            <TextBlock Grid.Row="5" Grid.Column="0" Text="基站状态"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="AP Status"/>
             <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AP.Status, Converter={StaticResource ApStatusConverter}, Mode=TwoWay}" />
-            <TextBlock Grid.Row="6" Grid.Column="0" Text="上线时间"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="Online Time"/>
             <TextBlock Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AP.LastOnline, Mode=OneWay, StringFormat={}{0:HH:mm:ss.fff}}" />
-            <TextBlock Grid.Row="7" Grid.Column="0" Text="离线时间"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="Offline Time"/>
             <TextBlock Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AP.LastOffline, Mode=OneWay, StringFormat={}{0:HH:mm:ss.fff}}" />
-            <TextBlock Grid.Row="8" Grid.Column="0" Text="心跳时间"/>
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="Heartbeat Time"/>
             <TextBlock Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AP.LastHeartbeat, Mode=OneWay, StringFormat={}{0:HH:mm:ss.fff}}" />
-            <TextBlock Grid.Row="9" Grid.Column="0" Text="最近发送"/>
+            <TextBlock Grid.Row="9" Grid.Column="0" Text="Last Send"/>
             <TextBlock Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AP.LastSend, Mode=OneWay, StringFormat={}{0:HH:mm:ss.fff}}" />
-            <TextBlock Grid.Row="10" Grid.Column="0" Text="最近返回"/>
+            <TextBlock Grid.Row="10" Grid.Column="0" Text="Last Recv"/>
             <TextBlock Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AP.LastReceive, Mode=OneWay, StringFormat={}{0:HH:mm:ss.fff}}" />
-            <TextBlock Grid.Row="11" Grid.Column="0" Text="队列长度"/>
+            <TextBlock Grid.Row="11" Grid.Column="0" Text="Task Count"/>
             <TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding AP.SendCount, Mode=OneWay}" />
             <TextBlock Grid.Row="11" Grid.Column="2" Text="{Binding AP.TotalCount, Mode=OneWay}" />
         </Grid>

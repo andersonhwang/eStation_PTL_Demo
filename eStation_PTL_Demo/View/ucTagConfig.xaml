@@ -11,7 +11,7 @@
     <UserControl.DataContext>
         <vm:TagConfigViewModel/>
     </UserControl.DataContext>
-    <GroupBox Header="灯条设置">
+    <GroupBox Header="Tag Config">
         <Grid h:GridHelper.LineBrush="Black" h:GridHelper.ShowBorder="True" h:GridHelper.LineThickness="0.5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -25,17 +25,17 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="起始ID"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Start ID"/>
             <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Config.StartID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="终止ID"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Stop ID"/>
             <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Config.EndID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="休眠间隔" ToolTip="低功耗休眠时间间隔，单位毫秒 ，1~65000，默认2000（2秒）"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Sleep Interval" ToolTip="Low power sleep interval, in milliseconds, 1~65000, default 2000 (2 seconds)"/>
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Config.SleepInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-            <TextBlock Grid.Row="2" Grid.Column="2" Text="心跳间隔" ToolTip="心跳包时间间隔，单位分钟，1~254，默认10（10分钟）"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="Heartbeat Interval" ToolTip="Heartbeat packet time interval, in minutes, 1-254, default 10 (10 minutes)"/>
             <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Config.HeartbeatInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="自动灭灯" ToolTip="无指令自动灭灯时间间隔，挡位5秒，1~254，默认36（180秒）"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Auto Light Off" ToolTip="Automatic light off interval without command, gear 5 seconds, 1-254, default 36 (180 seconds)"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Config.TurnOffInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-            <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" x:Name="btnGroupConfig" IsEnabled="{Binding IsConnect}" Command="{Binding CmdSendConfig}" Content="发送" />
+            <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" x:Name="btnGroupConfig" IsEnabled="{Binding IsConnect}" Command="{Binding CmdSendConfig}" Content="Send" />
         </Grid>
     </GroupBox>
 </UserControl>

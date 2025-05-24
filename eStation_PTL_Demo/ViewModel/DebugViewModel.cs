@@ -61,7 +61,7 @@ namespace eStation_PTL_Demo.ViewModel
         /// <param name="item">Debug item</param>
         private void Instance_DebugItemHandler(DebugItem item)
         {
-            Application.Current.Dispatcher.Invoke(() => { Items.Insert(0, item); });
+            Application.Current?.Dispatcher.Invoke(() => { Items.Insert(0, item); });
         }
 
         /// <summary>

@@ -19,14 +19,14 @@ namespace eStation_PTL_Demo.Converter
             return (TagStatus)value switch
             {
                 TagStatus.Init => "--",
-                TagStatus.Sending => "通信中",
-                TagStatus.Success => "成功",
-                TagStatus.Fail => "失败",
-                TagStatus.Online => "在线",
-                TagStatus.Heartbeat => "心跳",
-                TagStatus.Key => "按键",
-                TagStatus.GroupControl => "群控",
-                TagStatus.Duplicate => "去重",
+                TagStatus.Sending => "Sending",
+                TagStatus.Success => "OK",
+                TagStatus.Fail => "Error",
+                TagStatus.Online => "Idle",
+                TagStatus.Heartbeat => "Heartbeat",
+                TagStatus.Key => "Key",
+                TagStatus.GroupControl => "Group",
+                TagStatus.Duplicate => "Duplicate",
                 _ => "--",
             };
         }
@@ -35,14 +35,14 @@ namespace eStation_PTL_Demo.Converter
         {
             return (string)value switch
             {
-                "通信中" => TagStatus.Sending,
-                "成功" => TagStatus.Success,
-                "失败" => TagStatus.Fail,
-                "在线" => TagStatus.Online,
-                "心跳" => TagStatus.Heartbeat,
-                "按键" => TagStatus.Key,
-                "群控" => TagStatus.GroupControl,
-                "去重" => TagStatus.Duplicate,
+                "Sending" => TagStatus.Sending,
+                "OK" => TagStatus.Success,
+                "Error" => TagStatus.Fail,
+                "Idle" => TagStatus.Online,
+                "Heartbeat" => TagStatus.Heartbeat,
+                "Key" => TagStatus.Key,
+                "Group" => TagStatus.GroupControl,
+                "Duplicate" => TagStatus.Duplicate,
                 _ => TagStatus.Init,
             };
         }

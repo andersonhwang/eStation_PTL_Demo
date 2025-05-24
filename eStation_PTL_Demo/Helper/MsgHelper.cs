@@ -8,7 +8,7 @@ namespace eStation_PTL_Demo.Helper
         {
             try
             {
-                MessageBox.Show(message, "消息", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(message, "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch { }
         }
@@ -17,7 +17,7 @@ namespace eStation_PTL_Demo.Helper
         {
             try
             {
-                MessageBox.Show(message, "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch { }
         }
@@ -26,7 +26,7 @@ namespace eStation_PTL_Demo.Helper
         {
             try
             {
-                return MessageBox.Show(message, "确认", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                return MessageBox.Show(message, "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
             }
             catch { return MessageBoxResult.Cancel; }
         }

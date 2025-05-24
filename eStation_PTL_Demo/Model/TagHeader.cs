@@ -23,7 +23,7 @@
         /// <summary>
         /// Auto test display
         /// </summary>
-        public string AutoTestDisplay { get => autoTest ? "停止测试" : "自动测试"; }
+        public string AutoTestDisplay { get => autoTest ? "Stop Test" : "Auto Test"; }
         /// <summary>
         /// Auto register
         /// </summary>

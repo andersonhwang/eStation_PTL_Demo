@@ -17,20 +17,20 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Right" FlowDirection="LeftToRight" Orientation="Horizontal">
-            <CheckBox Content="自动注册" IsChecked="{Binding DataContext.Header.AutoRegister, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
-            <CheckBox Content="只看数据" IsChecked="{Binding DataContext.Header.OnlyData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
-            <Button Content="随机一下" IsEnabled="{Binding IsConnect}" CommandParameter="R" Command="{Binding DataContext.CmdRandomTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+            <CheckBox Content="Auto Register" IsChecked="{Binding DataContext.Header.AutoRegister, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
+            <CheckBox Content="Only Data" IsChecked="{Binding DataContext.Header.OnlyData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
+            <Button Content="Random" IsEnabled="{Binding IsConnect}" CommandParameter="R" Command="{Binding DataContext.CmdRandomTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
             <TextBox Width="50" Text="{Binding Header.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
             <Button Content="{Binding Header.AutoTestDisplay}" IsEnabled="{Binding IsConnect}" Command="{Binding CmdAutoSend}"/>
-            <TextBlock Text="绑定号"/>
+            <TextBlock Text="Group Bind"/>
             <TextBox Width="50"  Text="{Binding Header.Group, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-            <Button Content="绑定" IsEnabled="{Binding IsConnect}" CommandParameter="B" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
-            <TextBlock Text="时长"/>
+            <Button Content="Bind" IsEnabled="{Binding IsConnect}" CommandParameter="B" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+            <TextBlock Text="Time"/>
             <TextBox Width="50" Text="{Binding Header.Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-            <Button Content="亮灯" IsEnabled="{Binding IsConnect}" CommandParameter="C" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
-            <Button Content="空包" IsEnabled="{Binding IsConnect}" CommandParameter="E" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+            <Button Content="Send" IsEnabled="{Binding IsConnect}" CommandParameter="C" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+            <Button Content="Empty" IsEnabled="{Binding IsConnect}" CommandParameter="E" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
         </StackPanel>
-        <GroupBox Header="灯条列表" Grid.Row="1" >
+        <GroupBox Header="Tag List" Grid.Row="1" >
             <DataGrid x:Name="gdTagList" ItemsSource="{Binding Tags}" AllowDrop="False" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="True">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn>
@@ -86,7 +86,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <CheckBox Content="蜂鸣" IsChecked="{Binding DataContext.Header.Beep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"
+                            <CheckBox Content="Beep" IsChecked="{Binding DataContext.Header.Beep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"
                                   Command="{Binding DataContext.CmdSelectTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" CommandParameter="Beep">
                             </CheckBox>
                         </DataGridTemplateColumn.Header>
@@ -98,7 +98,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <CheckBox Content="闪烁" IsChecked="{Binding DataContext.Header.Flashing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"
+                            <CheckBox Content="Blink" IsChecked="{Binding DataContext.Header.Flashing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"
                                   Command="{Binding DataContext.CmdSelectTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" CommandParameter="Flashing">
                             </CheckBox>
                         </DataGridTemplateColumn.Header>
@@ -110,7 +110,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="分组" />
+                            <TextBlock Text="Group" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -120,7 +120,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="状态" />
+                            <TextBlock Text="Status" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -130,7 +130,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="通信计数" />
+                            <TextBlock Text="Send Count" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -144,7 +144,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="心跳计数" />
+                            <TextBlock Text="Heartbeat Count" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -158,7 +158,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="按键计数" />
+                            <TextBlock Text="Key Count" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -172,7 +172,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="发送时间" />
+                            <TextBlock Text="Last Send" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -202,7 +202,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="电量" />
+                            <TextBlock Text="Battery" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -213,11 +213,11 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="录入灯条" Name="miPtlList" Command="{Binding CmdMenu}" CommandParameter="E"/>
+                        <MenuItem Header="Edit List" Name="miPtlList" Command="{Binding CmdMenu}" CommandParameter="E"/>
                         <Separator/>
-                        <MenuItem Header="重置状态" Name="miReset" Command="{Binding CmdMenu}" CommandParameter="R"/>
+                        <MenuItem Header="Reset status" Name="miReset" Command="{Binding CmdMenu}" CommandParameter="R"/>
                         <Separator/>
-                        <MenuItem Header="导出记录" Name="miExport" Command="{Binding CmdMenu}" CommandParameter="P"/>
+                        <MenuItem Header="Export Records" Name="miExport" Command="{Binding CmdMenu}" CommandParameter="P"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

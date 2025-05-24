@@ -18,12 +18,12 @@ namespace eStation_PTL_Demo.Converter
 
             return (ApStatus)value switch
             {
-                ApStatus.Init => "等待连接",
-                ApStatus.Connecting => "连接中…",
-                ApStatus.Online => "在线",
-                ApStatus.Offline => "离线",
-                ApStatus.Working => "通信中",
-                ApStatus.ConnectError => "连接错误",
+                ApStatus.Init => "Wait",
+                ApStatus.Connecting => "Connecting",
+                ApStatus.Online => "Online",
+                ApStatus.Offline => "Offline",
+                ApStatus.Working => "Working",
+                ApStatus.ConnectError => "Error",
                 _ => "--",
             };
         }
@@ -32,12 +32,12 @@ namespace eStation_PTL_Demo.Converter
         {
             return (string)value switch
             {
-                "等待连接" => ApStatus.Init,
-                "连接中…" => ApStatus.Connecting,
-                "在线" => ApStatus.Online,
-                "离线" => ApStatus.Offline,
-                "通信中" => ApStatus.Working,
-                "错误" => ApStatus.ConnectError,
+                "Wait" => ApStatus.Init,
+                "Connecting" => ApStatus.Connecting,
+                "Online" => ApStatus.Online,
+                "Offline" => ApStatus.Offline,
+                "Working" => ApStatus.Working,
+                "Error" => ApStatus.ConnectError,
                 _ => ApStatus.Init,
             };
         }

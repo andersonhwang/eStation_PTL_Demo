@@ -75,28 +75,28 @@
                         <Setter Property="Foreground" Value="Black"/>
                     </DataTrigger>
                     <!--Sending-->
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="通信中">
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="Sending">
                         <Setter Property="Foreground" Value="GreenYellow"/>
                         <Setter Property="Background" Value="Green"/>
                     </DataTrigger>
                     <!--Pass-->
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="成功">
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="OK">
                         <Setter Property="Foreground" Value="Blue"/>
                     </DataTrigger>
                     <!--Fail-->
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="失败">
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="Error">
                         <Setter Property="Foreground" Value="Red"/>
                     </DataTrigger>
                     <!--Online-->
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="在线">
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="Idle">
                         <Setter Property="Foreground" Value="Blue"/>
                     </DataTrigger>
                     <!--Heartbeat-->
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="心跳">
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="Heartbeat">
                         <Setter Property="Foreground" Value="Blue"/>
                     </DataTrigger>
                     <!--Online-->
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="按键">
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"  Value="Key">
                         <Setter Property="Foreground" Value="Blue"/>
                     </DataTrigger>
                 </Style.Triggers>

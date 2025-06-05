@@ -16,7 +16,7 @@
         /// <summary>
         /// 休眠周期，毫秒，默认为2000，范围1～65000
         /// </summary>
-        public byte SleepInterval { get; set; }
+        public int SleepInterval { get; set; } = 2000;
         /// <summary>
         /// 心跳周期，分组，默认为10，范围1～254
         /// </summary>

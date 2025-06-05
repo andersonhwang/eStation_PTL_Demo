@@ -12,6 +12,9 @@ namespace eStation_PTL_Demo.Model
         private int? sequence = null;
         private int? rfPower = null;
         private int? battery = null;
+        private int? speed = null;
+        private int? heartbeat = null;
+        private int? turnOff = null;
         private TagStatus status = TagStatus.Init;
         private DateTime? lastSend = null;
         private DateTime? lastReceive = null;
@@ -27,6 +30,9 @@ namespace eStation_PTL_Demo.Model
         public int? Sequence { get => sequence; set { sequence = value; NotifyPropertyChanged(nameof(Sequence)); } }
         public int? RfPower { get => rfPower; set { rfPower = value; NotifyPropertyChanged(nameof(RfPower)); } }
         public int? Battery { get => battery; set { battery = value; NotifyPropertyChanged(nameof(Battery)); } }
+        public int? Speed { get => speed; set { speed = value; NotifyPropertyChanged(nameof(Speed)); } }
+        public int? Heartbeat { get => heartbeat; set { heartbeat = value; NotifyPropertyChanged(nameof(Heartbeat)); } }
+        public int? TurnOff { get => turnOff; set { turnOff = value; NotifyPropertyChanged(nameof(TurnOff)); } }
         public TagStatus Status { get => status; set { status = value; NotifyPropertyChanged(nameof(Status)); } }
         public DateTime? LastSend { get => lastSend; set { lastSend = value; NotifyPropertyChanged(nameof(LastSend)); } }
         public DateTime? LastReceive { get => lastReceive; set { lastReceive = value; NotifyPropertyChanged(nameof(LastReceive)); } }

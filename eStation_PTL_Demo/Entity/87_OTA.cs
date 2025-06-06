@@ -1,4 +1,6 @@
-﻿namespace eStation_PTL_Demo.Entity
+﻿using eStation_PTL_Demo.Enumerator;
+
+namespace eStation_PTL_Demo.Entity
 {
     /// <summary>
     /// OTA entity
@@ -13,6 +15,10 @@
         /// Version 
         /// </summary>
         public int Version { get; init; } = 0;
+        /// <summary>
+        /// Factory code
+        /// </summary>
+        public FactoryCode Factory { get; init; } = FactoryCode.PHY6252;
         /// <summary>
         /// Firmware MD5
         /// </summary>

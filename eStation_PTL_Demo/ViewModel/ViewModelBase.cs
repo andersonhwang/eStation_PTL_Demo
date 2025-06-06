@@ -80,6 +80,51 @@ namespace eStation_PTL_Demo.ViewModel
     }
 
     /// <summary>
+    /// Base of dialog view model
+    /// </summary>
+    public class DialogViewModelBase : ViewModelBase
+    {
+        private bool? dialogResult;
+        /// <summary>
+        /// Dialog result
+        /// </summary>
+        public bool? DialogResult
+        {
+            get => dialogResult;
+            set { dialogResult = value; NotifyPropertyChanged(nameof(DialogResult)); }
+        }
+
+        /// <summary>
+        /// Command - cancel
+        /// </summary>
+        public ICommand CmdCancel { get; set; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public DialogViewModelBase()
+        {
+            CmdCancel = new MyCommand(DoCancel, CanCancel);
+        }
+
+        /// <summary>
+        /// Can cancel
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        protected bool CanCancel(object obj) => true;
+
+        /// <summary>
+        /// Do cancel
+        /// </summary>
+        /// <param name="obj"></param>
+        protected void DoCancel(object obj)
+        {
+            DialogResult = true;
+        }
+    }
+
+    /// <summary>
     /// Interface async command
     /// </summary>
     public interface IAsyncCommand : ICommand

@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:eStation_PTL_Demo"
+        xmlns:e="clr-namespace:eStation_PTL_Demo.Enumerator"
+        xmlns:t="clr-namespace:eStation_PTL_Demo.Extension"
+        xmlns:vm="clr-namespace:eStation_PTL_Demo.ViewModel"
         xmlns:h="clr-namespace:eStation_PTL_Demo.Helper" ShowInTaskbar="False"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
-        Title="LoadFirmware" Height="156" Width="300">
+        Title="LoadFirmware" Height="156" Width="400">
+    <Window.DataContext>
+        <vm:FirmwareViewModel />
+    </Window.DataContext>
     <Grid h:GridHelper.LineBrush="Black" h:GridHelper.ShowBorder="True" h:GridHelper.LineThickness="0.5">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -18,16 +24,20 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="OTA Type:"/>
-        <RadioButton Grid.Row="0" Grid.Column="1" Content="AP" GroupName="OtaType" x:Name="rBtnAP" IsChecked="True"/>
-        <RadioButton Grid.Row="0" Grid.Column="2" Content="PTL" GroupName="OtaType" x:Name="rBtnPTL"/>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Firmware:"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="txtFirmware"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Version:"/>
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtVersion"/>
-        <Button Grid.Row="2" Grid.Column="2" Content="Browse" x:Name="btnBrowse" Click="btnBrowse_Click"/>
-        <Button Grid.Row="3" Grid.Column="0" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click"/>
-        <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Content="OTA" x:Name="btnOTA" Click="btnOTA_Click"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="OTA Type"/>
+        <RadioButton Grid.Row="0" Grid.Column="1" Content="AP" GroupName="OtaType" IsChecked="{Binding Firmware.Type, Converter={StaticResource OtaTypeConverter}, ConverterParameter='0'}"/>
+        <RadioButton Grid.Row="0" Grid.Column="2" Content="PTL" GroupName="OtaType" IsChecked="{Binding Firmware.Type, Converter={StaticResource OtaTypeConverter}, ConverterParameter='1'}"/>
+        <TextBlock Grid.Row="0" Grid.Column="3"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Firmware"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Firmware.Path}"/>
+        <Button Grid.Row="1" Grid.Column="3" Content="Browse" Command="{Binding CmdBrowse}"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Version"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Firmware.Version}"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="Factory"/>
+        <ComboBox Grid.Row="2" Grid.Column="3" ItemsSource="{Binding Source={t:EnumSource {x:Type e:FactoryCode}}}" SelectedValue="{Binding Firmware.Factory}"/>
+        <Button Grid.Row="3" Grid.Column="0" Content="Cancel" Command="{Binding CmdCancel}"/>
+        <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Content="OTA" Command="{Binding CmdOTA}"/>
     </Grid>
 </Window>

@@ -20,7 +20,7 @@ namespace eStation_PTL_Demo.Helper
         /// <param name="path">Save path, default with object type</param>
         public static void Save<T>(T obj, string path = "") where T : class
         {
-            if(string.IsNullOrEmpty(path)) path = obj.GetType().Name + ".json";
+            if (string.IsNullOrEmpty(path)) path = obj.GetType().Name + ".json";
             var bytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(obj));
             File.WriteAllBytes(path, bytes);
         }
@@ -65,8 +65,16 @@ namespace eStation_PTL_Demo.Helper
         /// <returns>X509 certificate</returns>
         public static byte[] GetCertificate(string path, string key)
         {
-            var x509 = new X509Certificate2(path, key, X509KeyStorageFlags.Exportable);
-            return x509.Export(X509ContentType.Pfx);
+            try
+            {
+                var x509 = new X509Certificate2(path, key, X509KeyStorageFlags.Exportable);
+                return x509.Export(X509ContentType.Pfx);
+            }
+            catch (Exception e)
+            {
+                Log.Error("Get_Certificate_Error", e);
+                return [];
+            }
         }
 
         /// <summary>

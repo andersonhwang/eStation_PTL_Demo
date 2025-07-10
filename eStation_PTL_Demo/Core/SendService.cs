@@ -88,7 +88,7 @@ namespace eStation_PTL_Demo.Core
                                 await Task.Delay(200);
                                 continue;
                             }
-
+                            Log.Information($"[Recv]{data}");
                             var entity = JsonSerializer.Deserialize<BaseEntity>(data);
                             if (entity is null) continue;
                             switch (entity.Code)

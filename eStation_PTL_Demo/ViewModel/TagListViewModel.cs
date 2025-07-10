@@ -392,6 +392,7 @@ namespace eStation_PTL_Demo.ViewModel
                         tag.Battery = item.Voltage;
                         tag.Version = item.Version;
                         tag.Group = item.Group;
+                        tag.Type = item.Type;
                         tag.Speed = item.SleepInterval;
                         tag.Heartbeat = item.HeartbeatInterval;
                         tag.TurnOff = item.TurnOffInterval;

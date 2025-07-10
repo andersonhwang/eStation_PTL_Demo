@@ -146,6 +146,8 @@ namespace eStation_PTL_Demo.Core
                     .WithTopic($"/estation/{client.Key}/recv")
                     .WithPayload(JsonSerializer.Serialize(t))
                     .Build();
+
+                Log.Information(Convert.ToHexString(mqtt.PayloadSegment.ToArray()) + " " + mqtt.Topic);
                 await mqttServer.InjectApplicationMessage(new InjectedMqttApplicationMessage(mqtt));
                 return SendResult.Success;
             }

@@ -88,13 +88,14 @@ namespace eStation_PTL_Demo.ViewModel
         /// Do OTA
         /// </summary>
         /// <param name="obj"></param>
-        private async Task DoOTA(object obj) 
+        private async Task DoOTA(object obj)
             => await SendService.Instance.Send(new OTA
-        {
-            Type = Firmware.Type,
-            Firmware = Firmware.Bytes,
-            Version = Firmware.Version,
-            MD5 = Firmware.MD5,
-        });
+            {
+                Type = Firmware.Type,
+                Firmware = Firmware.Bytes,
+                Version = Firmware.Version,
+                MD5 = Firmware.MD5,
+                Factory = Firmware.Factory
+            });
     }
 }

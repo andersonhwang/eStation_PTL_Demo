@@ -25,6 +25,7 @@ namespace eStation_PTL_Demo.Model
         protected int sendCount = 0;
         protected int receiveCount = 0;
         protected int group = 0;
+        protected int type = 0;
 
         public int? Version { get => version; set { version = value; NotifyPropertyChanged(nameof(Version)); } }
         public int? Sequence { get => sequence; set { sequence = value; NotifyPropertyChanged(nameof(Sequence)); } }
@@ -44,5 +45,6 @@ namespace eStation_PTL_Demo.Model
         public int ReceiveCount { get => receiveCount; set { receiveCount = value; NotifyPropertyChanged(nameof(ReceiveCount)); NotifyPropertyChanged(nameof(ReceiveCountDisplay)); } }
         public string ReceiveCountDisplay { get => $"{ReceiveCount}/{SendCount}"; }
         public int Group { get => group; set { group = value; NotifyPropertyChanged(nameof(Group)); } }
+        public int Type { get => type; set { type = value; NotifyPropertyChanged(nameof(Type)); } }
     }
 }

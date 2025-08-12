@@ -21,7 +21,7 @@ namespace eStation_PTL_Demo.Model
         private DateTime? lastReceive = null;
         private int totalCount = 0;
         private int sendCount = 0;
-        private int connType = 0;
+        private int connType = -1;
         private bool encrypted = false;
 
         /// <summary>

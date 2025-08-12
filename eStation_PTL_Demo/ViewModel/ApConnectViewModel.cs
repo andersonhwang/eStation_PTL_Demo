@@ -15,6 +15,17 @@ namespace eStation_PTL_Demo.ViewModel
         private string port = "9071";
         private ConnInfo conn = new();
 
+        private string runButtonText = "RUN";
+        public string RunButtonText
+        {
+            get => runButtonText;
+            set
+            {
+                runButtonText = value;
+                NotifyPropertyChanged(nameof(RunButtonText));
+            }
+        }
+
         /// <summary>
         /// Port
         /// </summary>
@@ -46,6 +57,14 @@ namespace eStation_PTL_Demo.ViewModel
             CmdCheck = new MyCommand(DoCheck, CanCheck);
             CmdRun = new MyCommand(DoRun, CanRun);
             CmdCertificate = new MyCommand(DoCertificate, CanCertificate);
+
+            SendService.Instance.Register(UpdateRunButtonState);
+
+        }
+
+        private void UpdateRunButtonState(bool isRunning)
+        {
+            RunButtonText = isRunning ? "STOP" : "RUN";
         }
 
         /// <summary>
@@ -83,12 +102,19 @@ namespace eStation_PTL_Demo.ViewModel
         /// <param name="obj"></param>
         private void DoRun(object obj)
         {
-            var result = Check();
-            if (result > 0)
+            var result = -1;
+            if (!IsRun)
+                result = Check();
+
+            if (result <= 0)
             {
-                Conn.Port = result;
-                IsRun = SendService.Instance.Run(Conn);
+                return;
             }
+
+            Conn.Port = result;
+
+            IsRun = SendService.Instance.Run(Conn);
+
             if (IsRun)
             {
                 FileHelper.Save(Conn);
@@ -127,7 +153,7 @@ namespace eStation_PTL_Demo.ViewModel
             if (!int.TryParse(Port, out int value))
             {
                 MsgHelper.Error($"Invliad port {Port}");
-                return 0;
+                return 0; 
             }
 
             if (value < 1000 || value > 0xFFFF)

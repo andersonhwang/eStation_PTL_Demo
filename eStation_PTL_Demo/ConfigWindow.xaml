@@ -26,6 +26,8 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -53,8 +55,12 @@
             <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Config.Gateway, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Config.AutoIP, Converter={StaticResource BoolConverter}}"/>
             <TextBlock Grid.Row="10" Grid.Column="0" Text="心跳速度"/>
             <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Config.Heartbeat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Grid.Row="11" Grid.Column="0" Content="取消" Click="Button_Click"/>
-            <Button Grid.Row="11" Grid.Column="1" Content="设置" Command="{Binding CmdConfig}" />
+            <TextBlock Grid.Row="11" Grid.Column="0" Text="广播速度"/>
+            <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding Config.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Grid.Row="12" Grid.Column="0" Text="协议类型"/>
+            <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding Config.ConnType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Row="13" Grid.Column="0" Content="取消" Click="Button_Click"/>
+            <Button Grid.Row="13" Grid.Column="1" Content="设置" Command="{Binding CmdConfig}" />
         </Grid>
     </GroupBox>
 </Window>

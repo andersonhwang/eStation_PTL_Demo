@@ -21,6 +21,8 @@ namespace eStation_PTL_Demo.Model
         private DateTime? lastReceive = null;
         private int totalCount = 0;
         private int sendCount = 0;
+        private int connType = 0;
+        private bool encrypted = false;
 
         /// <summary>
         /// ID
@@ -87,5 +89,15 @@ namespace eStation_PTL_Demo.Model
         /// AP config
         /// </summary>
         public ApConfigB ConfigB = new();
+
+        /// <summary>
+        /// Conn type
+        /// </summary>
+        public int ConnType { get => connType; set { connType = value; NotifyPropertyChanged(nameof(ConnType)); } }
+
+        /// <summary>
+        /// Use TLS12
+        /// </summary>
+        public bool Encrypted { get => encrypted; set { encrypted = value; NotifyPropertyChanged(nameof(Encrypted)); } }
     }
 }

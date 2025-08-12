@@ -8,7 +8,7 @@
         xmlns:t="clr-namespace:eStation_PTL_Demo.Extension"
         xmlns:vm="clr-namespace:eStation_PTL_Demo.ViewModel"
         xmlns:h="clr-namespace:eStation_PTL_Demo.Helper" ShowInTaskbar="False"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" h:DialogHelper.DialogResult="{Binding DialogResult}"
         Title="LoadFirmware" Height="156" Width="400">
     <Window.DataContext>
         <vm:FirmwareViewModel />

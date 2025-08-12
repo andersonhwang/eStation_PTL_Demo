@@ -38,11 +38,11 @@ namespace eStation_PTL_Demo.Entity
         /// <summary>
         /// Disk size
         /// </summary>
-        public int DiskSize { get; internal set; } = 0;
+        public int DiskSize { get; set; } = 0;
         /// <summary>
         /// Free space
         /// </summary>
-        public int FreeSpace { get; internal set; } = 0;
+        public int FreeSpace { get; set; } = 0;
         /// <summary>
         /// Current config
         /// </summary>

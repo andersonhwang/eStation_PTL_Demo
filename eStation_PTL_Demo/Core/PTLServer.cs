@@ -11,7 +11,7 @@ namespace eStation_PTL_Demo.Core
         /// </summary>
         public ConnInfo Connection { get; protected set; }
         protected readonly object locker = new();
-        protected readonly Dictionary<string, Ap> Clients = [];
+        public readonly Dictionary<string, Ap> Clients = [];
         protected readonly Action<string, ApStatus> ApStatusHandler;
         protected readonly Action<string> ApDataHandler;
 
@@ -35,12 +35,18 @@ namespace eStation_PTL_Demo.Core
         public abstract bool Run();
 
         /// <summary>
+        /// Stop server
+        /// </summary>
+        /// <returns>The result</returns>
+        public abstract bool Stop();
+
+        /// <summary>
         /// Send data
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        public abstract Task<SendResult> Send<T>(T t) where T : BaseEntity;
+        public abstract Task<SendResult> Send(string topic, string payload);
 
         /// <summary>
         /// Get AP config

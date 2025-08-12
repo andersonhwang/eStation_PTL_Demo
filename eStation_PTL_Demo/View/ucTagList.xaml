@@ -19,16 +19,16 @@
         <StackPanel Grid.Row="0" HorizontalAlignment="Right" FlowDirection="LeftToRight" Orientation="Horizontal">
             <CheckBox Content="Auto Register" IsChecked="{Binding DataContext.Header.AutoRegister, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
             <CheckBox Content="Only Data" IsChecked="{Binding DataContext.Header.OnlyData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
-            <Button Content="Random" IsEnabled="{Binding IsConnect}" CommandParameter="R" Command="{Binding DataContext.CmdRandomTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+            <Button Content="Random" IsEnabled="False" CommandParameter="R" Command="{Binding DataContext.CmdRandomTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
             <TextBox Width="50" Text="{Binding Header.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-            <Button Content="{Binding Header.AutoTestDisplay}" IsEnabled="{Binding IsConnect}" Command="{Binding CmdAutoSend}"/>
+            <Button Content="{Binding Header.AutoTestDisplay}" IsEnabled="False" Command="{Binding CmdAutoSend}"/>
             <TextBlock Text="Group Bind"/>
             <TextBox Width="50"  Text="{Binding Header.Group, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
             <Button Content="Bind" IsEnabled="{Binding IsConnect}" CommandParameter="B" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
             <TextBlock Text="Time"/>
             <TextBox Width="50" Text="{Binding Header.Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
             <Button Content="Send" IsEnabled="{Binding IsConnect}" CommandParameter="C" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
-            <Button Content="Empty" IsEnabled="{Binding IsConnect}" CommandParameter="E" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+            <Button Content="Empty" IsEnabled="False" CommandParameter="E" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
         </StackPanel>
         <GroupBox Header="Tag List" Grid.Row="1" >
             <DataGrid x:Name="gdTagList" ItemsSource="{Binding Tags}" AllowDrop="False" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="True">

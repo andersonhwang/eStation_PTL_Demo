@@ -66,7 +66,7 @@
             </Label>
             <Button Grid.Row="5" Grid.Column="2" x:Name="btnBrowse" Content="Browse" IsEnabled="{Binding ElementName=chkSecurity, Path=IsChecked}" Command="{Binding CmdCertificate}"/>
             <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="Encrypt=True in appsetting.json file" Visibility="{Binding Conn.Security, Mode=OneWay, Converter={StaticResource VisibilityConverter}}"/>
-            <Button Grid.Row="6" Grid.Column="2"  Content="Run" Command="{Binding CmdRun}" IsEnabled="{Binding IsRun, Converter={StaticResource BoolConverter}}"/>
+            <Button Grid.Row="6" Grid.Column="2"  Content="{Binding RunButtonText}" Command="{Binding CmdRun}" />
         </Grid>
     </GroupBox>
 </UserControl>

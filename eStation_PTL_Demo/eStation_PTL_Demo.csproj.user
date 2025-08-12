@@ -1,12 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>D:\Work\Repos\Backend\eStation_PTL_Demo\eStation_PTL_Demo\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ClientCertificateWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ConfigWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -14,6 +19,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="TagList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TimeWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\ucApConnect.xaml.cs">

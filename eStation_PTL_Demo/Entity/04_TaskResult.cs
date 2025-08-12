@@ -74,4 +74,34 @@
         /// </summary>
         public int Voltage { get; set; } = 0;
     }
+
+    public class TaskResultV1
+    {
+        public string ID { get; set; } = string.Empty;
+        public int TotalCount { get; set; } = 0;
+        public int SendCount { get; set; } = 0;
+        public TagResultV1[] Results { get; set; } = [];
+
+    }
+
+    public class TagResultV1
+    {
+        public string TagID { get; set; } = string.Empty;
+        public string Version { get; set; } = "";
+        public int ResultType { get; set; } = 0;
+        public int RfPowerSend { get; set; } = -256;
+        public int RfPowerRecv { get; set; } = -256;
+        public int Battery { get; set; } = 0;
+        public int Sequence { get; set; } = 0;
+        public Color[] Colors { get; set; } = [];
+        public int Group { get; set; } = 0;        
+    }
+
+    public class Color
+    {
+        public bool R { get; set; }
+        public bool G { get; set; }
+        public bool B { get; set; }
+
+    }
 }

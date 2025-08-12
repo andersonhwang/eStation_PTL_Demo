@@ -1,15 +1,16 @@
-﻿using eStation_PTL_Demo.Core;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.IO;
+using System.Text;
+using System.Windows;
+using System.Windows.Input;
+using eStation_PTL_Demo.Core;
 using eStation_PTL_Demo.Entity;
 using eStation_PTL_Demo.Enumerator;
 using eStation_PTL_Demo.Helper;
 using eStation_PTL_Demo.Model;
 using Serilog;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Input;
 
 namespace eStation_PTL_Demo.ViewModel
 {
@@ -25,11 +26,50 @@ namespace eStation_PTL_Demo.ViewModel
         /// <summary>
         /// Tag header
         /// </summary>
-        public TagHeader Header { get => header; set { header = value; NotifyPropertyChanged(nameof(Header)); } }
+        public TagHeader Header
+        {
+            get => header;
+            set
+            {
+                if (header != null)
+                {
+                    header.PropertyChanged -= Header_PropertyChanged;
+                }
+
+                header = value;
+
+                if (header != null)
+                {
+                    header.PropertyChanged += Header_PropertyChanged;
+                }
+
+                NotifyPropertyChanged(nameof(Header));
+            }
+        }
         /// <summary>
         /// Tags list
         /// </summary>
-        public ObservableCollection<Tag> Tags { get => tags; set { tags = value; NotifyPropertyChanged(nameof(Tags)); } }
+        public ObservableCollection<Tag> Tags
+        {
+            get => tags;
+            set
+            {
+                if (tags != null)
+                {
+                    tags.CollectionChanged -= Tags_CollectionChanged;
+                }
+
+                tags = value;
+
+                if (tags != null)
+                {
+                    tags.CollectionChanged += Tags_CollectionChanged;
+                    SendService.Instance.OnTagsChanged(tags);
+                }
+
+                NotifyPropertyChanged(nameof(Tags));
+            }
+        }
         /// <summary>
         /// Command - select tags
         /// </summary>
@@ -65,9 +105,18 @@ namespace eStation_PTL_Demo.ViewModel
             CmdAutoSend = new MyCommand(AutoSendTags, CanSend);
             CmdMenu = new MyCommand(TagListMenu, CanMenu);
 
+            // 初始化完成属性后，添加监听
+            header.PropertyChanged += Header_PropertyChanged;
+            // 注册集合变更事件
+            Tags.CollectionChanged += Tags_CollectionChanged;
+
             LoadTags();
 
             SendService.Instance.Register(UpdateTaskResult);
+
+            // 初始通知SendService当前状态
+            SendService.Instance.OnAutoRegisterChanged(Header.AutoRegister);
+            SendService.Instance.OnTagsChanged(Tags);
         }
 
         /// <summary>
@@ -90,7 +139,7 @@ namespace eStation_PTL_Demo.ViewModel
         /// <param name="parameter"></param>
         public void SelectTags(object parameter)
         {
-            foreach (Tag tag in tags)
+            foreach (Tag tag in Tags)
             {
                 switch (parameter.ToString())
                 {
@@ -292,6 +341,12 @@ namespace eStation_PTL_Demo.ViewModel
             {
                 if (tag.Select)
                 {
+                    tag.R = false;
+                    tag.G = false;
+                    tag.B = false;
+                    tag.Beep = false;
+                    tag.Flashing = false;
+
                     var r = Random.Next(0x20);
                     if ((r & 0x10) == 0x10) tag.R = true;
                     if ((r & 0x08) == 0x08) tag.G = true;
@@ -345,7 +400,7 @@ namespace eStation_PTL_Demo.ViewModel
                 foreach (var line in lines)
                 {
                     var id = line.Trim().ToUpper();
-                    if (!Regex.IsMatch(id, "^[0-9A-F]{12}$")) continue;
+                    //if (!Regex.IsMatch(id, "^[0-9A-F]{12}$")) continue;
                     if (Tags.Any(x => x.TagID.Equals(id))) continue;
                     Tags.Add(new Tag(id));
                 }
@@ -432,6 +487,27 @@ namespace eStation_PTL_Demo.ViewModel
             tag.HeartbeatCount =
             tag.SendCount =
             tag.ReceiveCount = 0;
+        }
+
+        /// <summary>
+        /// 处理Header属性变更
+        /// </summary>
+        private void Header_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(TagHeader.AutoRegister))
+            {
+                // 通知SendService自动注册属性已变更
+                SendService.Instance.OnAutoRegisterChanged(Header.AutoRegister);
+            }
+        }
+
+        /// <summary>
+        /// 处理Tags集合变更
+        /// </summary>
+        private void Tags_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            // 通知SendService标签集合已变更
+            SendService.Instance.OnTagsChanged(Tags);
         }
     }
 }

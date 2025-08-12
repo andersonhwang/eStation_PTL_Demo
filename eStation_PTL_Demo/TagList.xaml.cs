@@ -61,7 +61,7 @@ namespace eStation_PTL_Demo
                 foreach (var item in items)
                 {
                     var id = item.Trim('\n');
-                    if (!reg.IsMatch(id) || hash.Contains(id)) continue;
+                    //if (!reg.IsMatch(id) || hash.Contains(id)) continue;
                     hash.Add(id);
                     builder.AppendLine(id);
                 }

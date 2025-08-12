@@ -16,7 +16,12 @@ namespace eStation_PTL_Demo.Core
             return false;
         }
 
-        public override Task<SendResult> Send<T>(T t)
+        public override Task<SendResult> Send(string topic, string payload)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool Stop()
         {
             throw new NotImplementedException();
         }

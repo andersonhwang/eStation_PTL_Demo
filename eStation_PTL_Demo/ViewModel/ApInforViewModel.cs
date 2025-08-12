@@ -25,12 +25,24 @@ namespace eStation_PTL_Demo.ViewModel
         public ICommand CmdConfig { get; private set; }
 
         /// <summary>
+        /// Command - Config
+        /// </summary>
+        public ICommand CmdCertificate { get; private set; }
+
+        /// <summary>
+        /// Command - Time
+        /// </summary>
+        public ICommand CmdTime { get; private set; }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public ApInforViewModel()
         {
             CmdOTA = new MyCommand(DoOTA, CanOTA);
             CmdConfig = new MyCommand(DoConfig, CanConfig);
+            CmdCertificate = new MyCommand(DoCertificate, CanCertificate);
+            CmdTime = new MyCommand(DoTime, CanTime);
 
             SendService.Instance.Register(UpdateApStatus);
             SendService.Instance.Register(UpdateTaskResult);
@@ -54,6 +66,20 @@ namespace eStation_PTL_Demo.ViewModel
         public bool CanConfig(object parameter) => IsConnect;
 
         /// <summary>
+        /// Can certificate
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        public bool CanCertificate(object parameter) => IsConnect;
+
+        /// <summary>
+        /// Can certificate
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        public bool CanTime(object parameter) => IsConnect;
+
+        /// <summary>
         /// Do OTA
         /// </summary>
         /// <param name="parameter"></param>
@@ -71,6 +97,26 @@ namespace eStation_PTL_Demo.ViewModel
         {
             var config = new ConfigWindow(SendService.Instance.GetConfig(AP.ID));
             config.ShowDialog();
+        }
+
+        /// <summary>
+        /// Do Certificate
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void DoCertificate(object parameter)
+        {
+            var ctf = new ClientCertificateWindow();
+            ctf.ShowDialog();
+        }
+
+        /// <summary>
+        /// Do Time
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void DoTime(object parameter)
+        {
+            var tw = new TimeWindow();
+            tw.ShowDialog();
         }
 
         /// <summary>
@@ -118,6 +164,8 @@ namespace eStation_PTL_Demo.ViewModel
             AP.MAC = info.MAC;
             AP.AppVersion = info.AppVersion.ToString();
             AP.ModVersion = $"S:{info.ModVersion[0]},R:{info.ModVersion[1]},K:{info.ModVersion[2]}";
+            AP.ConnType = info.ConfigB.ConnType;
+            AP.Encrypted = info.ConfigB.Encrypted;
         }
 
         /// <summary>

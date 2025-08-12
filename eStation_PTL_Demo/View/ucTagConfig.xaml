@@ -35,7 +35,14 @@
             <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Config.HeartbeatInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Auto Light Off" ToolTip="Automatic light off interval without command, gear 5 seconds, 1-254, default 36 (180 seconds)"/>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Config.TurnOffInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-            <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" x:Name="btnGroupConfig" IsEnabled="{Binding IsConnect}" Command="{Binding CmdSendConfig}" Content="Send" />
+            <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" x:Name="btnGroupConfig" Command="{Binding CmdSendConfig}" Content="Send">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource ConnTypeConverter}">
+                        <Binding Path="IsConnect"/>
+                        <Binding Path="ConnType"/>
+                    </MultiBinding>
+                </Button.IsEnabled>
+            </Button>
         </Grid>
     </GroupBox>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using eStation_PTL_Demo.Core;
+using eStation_PTL_Demo.Entity;
 using eStation_PTL_Demo.Enumerator;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -12,6 +13,7 @@ namespace eStation_PTL_Demo.ViewModel
     {
         private bool isConnect = false;
         private bool isRun = false;
+        private int connType = -1;
 
         /// <summary>
         /// AP is connect
@@ -31,12 +33,24 @@ namespace eStation_PTL_Demo.ViewModel
             set { isRun = value; NotifyPropertyChanged(nameof(IsRun)); }
         }
 
+        public bool IsNewVersion => ConnType != 0;
+
+        /// <summary>
+        /// AP connection type
+        /// </summary>
+        public int ConnType
+        {
+            get => connType;
+            set { connType = value; NotifyPropertyChanged(nameof(ConnType));NotifyPropertyChanged(nameof(IsNewVersion)); }
+        }
+
         /// <summary>
         /// Basic constructor
         /// </summary>
         public ViewModelBase()
         {
             SendService.Instance.Register(ApStatusHandler);
+            SendService.Instance.Register(ApInforHandler);
         }
 
         /// <summary>
@@ -44,6 +58,12 @@ namespace eStation_PTL_Demo.ViewModel
         /// </summary>
         /// <param name="status"></param>
         public void ApStatusHandler(ApStatus status) => IsConnect = status is ApStatus.Online or ApStatus.Working;
+
+        /// <summary>
+        /// Ap infor handler
+        /// </summary>
+        /// <param name="status"></param>
+        public void ApInforHandler(ApInfor status) => ConnType = (status?.ConfigB?.ConnType) ?? -1;
 
         /// <summary>
         /// Can send

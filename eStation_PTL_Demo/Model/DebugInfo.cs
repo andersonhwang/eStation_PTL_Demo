@@ -75,11 +75,12 @@
             name = code switch
             {
                 0x00 => "ApRegister",
-                0x01 => "ApInfor",
-                0x02 => "ApHeartbeat",
+                0x01 or 0x10 => "ApInfor",
+                0x02 or 0x13 => "ApHeartbeat",
                 0x03 => "TaskResponse",
-                0x04 => "TaskResult",
-                0x80 => "ApREsponse",
+                0x04 or 0x12 => "TaskResult",
+                0x70 => "Time",
+                0x80 => "ApResponse",
                 0x81 => "ApConfig",
                 0x82 => "TagConfig",
                 0x83 => "Order",
@@ -87,6 +88,8 @@
                 0x85 => "Bind",
                 0x86 => "GroupBind",
                 0x87 => "OTA",
+                0x88 => "Certificate",
+                0x11 => "Message",
                 _ => string.Empty,
             };
         }

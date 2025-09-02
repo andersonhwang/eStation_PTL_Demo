@@ -374,10 +374,83 @@ namespace eStation_PTL_Demo.ViewModel
                     Reset();
                     break;
                 case "P":
-
+                    ExportTagsToExcel();
                     break;
             }
         }
+
+        /// <summary>
+        /// Export tags to Excel (CSV format)
+        /// </summary>
+        private void ExportTagsToExcel()
+        {
+            try
+            {
+                var saveDialog = new Microsoft.Win32.SaveFileDialog
+                {
+                    Filter = "Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv",
+                    DefaultExt = ".xlsx",
+                    FileName = $"TagList_{DateTime.Now:yyyyMMdd_HHmmss}"
+                };
+
+                if (saveDialog.ShowDialog() != true) return;
+
+                var csv = new StringBuilder();
+
+                // 添加表头
+                csv.AppendLine("TagID,Group,Status,Version,RfPower,Battery,Speed,Heartbeat,TurnOff,Type,SendCount,ReceiveCount,HeartbeatCount,KeyCount,LastSend,LastReceive,LastHeartbeat,LastKey");
+
+                // 添加数据行
+                foreach (var tag in Tags)
+                {
+                    csv.AppendLine($"{EscapeCsvField(tag.TagID)}," +                                  
+                                  $"{tag.Group}," +
+                                  $"{tag.Status}," +
+                                  $"{tag.Version}," +
+                                  $"{tag.RfPower}," +
+                                  $"{tag.Battery}," +
+                                  $"{tag.Speed}," +
+                                  $"{tag.Heartbeat}," +
+                                  $"{tag.TurnOff}," +
+                                  $"{tag.Type}," +
+                                  $"{tag.SendCount}," +
+                                  $"{tag.ReceiveCount}," +
+                                  $"{tag.HeartbeatCount}," +
+                                  $"{tag.KeyCount}," +
+                                  $"{EscapeCsvField(tag.LastSend?.ToString("yyyy-MM-dd HH:mm:ss.fff"))}," +
+                                  $"{EscapeCsvField(tag.LastReceive?.ToString("yyyy-MM-dd HH:mm:ss.fff"))}," +
+                                  $"{EscapeCsvField(tag.LastHeartbeat?.ToString("yyyy-MM-dd HH:mm:ss.fff"))}," +
+                                  $"{EscapeCsvField(tag.LastKey?.ToString("yyyy-MM-dd HH:mm:ss.fff"))}");
+                }
+
+                File.WriteAllText(saveDialog.FileName, csv.ToString(), Encoding.UTF8);
+
+                MsgHelper.Infor($"Export completed! File saved to: {saveDialog.FileName}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Export_Tags_Error");
+                MsgHelper.Error($"Export failed: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Escape CSV field
+        /// </summary>
+        /// <param name="field"></param>
+        /// <returns></returns>
+        private string EscapeCsvField(string? field)
+        {
+            if (string.IsNullOrEmpty(field)) return "";
+
+            if (field.Contains(',') || field.Contains('"') || field.Contains('\n'))
+            {
+                return $"\"{field.Replace("\"", "\"\"")}\"";
+            }
+
+            return field;
+        }
+
 
         /// <summary>
         /// Load tags

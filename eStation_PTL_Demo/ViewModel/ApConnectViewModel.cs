@@ -106,7 +106,7 @@ namespace eStation_PTL_Demo.ViewModel
             if (!IsRun)
                 result = Check();
 
-            if (result <= 0)
+            if (result <= 0 && !IsRun)
             {
                 return;
             }

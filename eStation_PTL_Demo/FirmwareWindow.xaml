@@ -31,10 +31,10 @@
         <RadioButton Grid.Row="0" Grid.Column="2" Content="PTL" GroupName="OtaType" IsChecked="{Binding Firmware.Type, Converter={StaticResource OtaTypeConverter}, ConverterParameter='1'}"/>
         <TextBlock Grid.Row="0" Grid.Column="3"/>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Firmware"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Firmware.Path}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Firmware.Path, UpdateSourceTrigger=PropertyChanged}"/>
         <Button Grid.Row="1" Grid.Column="3" Content="Browse" Command="{Binding CmdBrowse}"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Version"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Firmware.Version}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Firmware.Version, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text="Factory"/>
         <ComboBox Grid.Row="2" Grid.Column="3" ItemsSource="{Binding Source={t:EnumSource {x:Type e:FactoryCode}}}" SelectedValue="{Binding Firmware.Factory}"/>
         <Button Grid.Row="3" Grid.Column="0" Content="Cancel" Command="{Binding CmdCancel}"/>

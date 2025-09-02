@@ -26,7 +26,7 @@
             <TextBox Width="50"  Text="{Binding Header.Group, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
             <Button Content="Bind" IsEnabled="{Binding IsConnect}" CommandParameter="B" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
             <TextBlock Text="Time"/>
-            <TextBox Width="50" Text="{Binding Header.Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
+            <TextBox Width="50" Text="{Binding Header.TimeText, Mode=TwoWay}" InputScope="Number"/>
             <Button Content="Send" IsEnabled="{Binding IsConnect}" CommandParameter="C" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
             <Button Content="Empty" IsEnabled="False" CommandParameter="E" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
         </StackPanel>

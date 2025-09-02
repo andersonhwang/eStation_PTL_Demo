@@ -6,16 +6,42 @@
     /// <param name="id">Tag ID</param>
     public class TagHeader(string id) : TagBasic(id)
     {
+        private const int defaultTime = 10;
         private bool autoTest = false;
         private bool autoRegister = false;
         private bool onlyData = true;
         private int autoMode = 0;
-        private int time = 10;
+        private int time = defaultTime;
         private int group = 0;
         private int speed = 60;
         private int roundCount = 0;
         private int sendCount = 0;
         private int successCount = 0;
+        private string timeText = defaultTime.ToString();
+
+        public string TimeText
+        {
+            get => timeText;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    timeText = defaultTime.ToString();
+                    Time = defaultTime;
+                }
+                else if (int.TryParse(value, out int v))
+                {
+                    timeText = value;
+                    Time = v;
+                }
+                else
+                {
+                    timeText = defaultTime.ToString();
+                    Time = defaultTime;
+                }
+                NotifyPropertyChanged(nameof(TimeText));
+            }
+        }
         /// <summary>
         /// Auto test
         /// </summary>
@@ -39,7 +65,18 @@
         /// <summary>
         /// Time
         /// </summary>
-        public int Time { get => time; set { time = value; NotifyPropertyChanged(nameof(Time)); } }
+        public int Time { 
+            get => time;
+            set
+            {
+                if (time != value)
+                {
+                    time = value;
+                    TimeText = time.ToString();
+                    NotifyPropertyChanged(nameof(Time));
+                }
+            }
+        }
         /// <summary>
         /// Group
         /// </summary>

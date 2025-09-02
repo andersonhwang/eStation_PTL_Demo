@@ -13,7 +13,7 @@
     <Copyright>ETAG Technology Co., Ltd</Copyright>
     <PackageProjectUrl>https://github.com/andersonhwang/eStation_PTL_Demo</PackageProjectUrl>
     <Title>eStation_Ptl_Demo</Title>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>

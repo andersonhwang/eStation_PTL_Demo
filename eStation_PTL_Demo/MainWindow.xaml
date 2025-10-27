@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:eStation_PTL_Demo"
         xmlns:v="clr-namespace:eStation_PTL_Demo.View"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closed="Window_Closed"
-        Title="Demo - eStation PTL Eidition" Height="1040" Width="1880">
+        Title="Demo - eStation PTL Eidition - 1.0.5" Height="1040" Width="1880">
     <Grid FlowDirection="LeftToRight">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>

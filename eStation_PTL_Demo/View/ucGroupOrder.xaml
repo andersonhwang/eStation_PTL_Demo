@@ -44,7 +44,7 @@
             <TextBlock Grid.Row="3" Grid.Column="2" Text="Blink"/>
             <CheckBox Grid.Row="3" Grid.Column="3" Content="Yes" IsChecked="{Binding Group.Flashing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsNewVersion}" />
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Times"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Group.Time, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" MaxLines="1" InputScope="Number"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Group.TimeText, Mode=TwoWay}" MaxLength="4" MaxLines="1" InputScope="Number"/>
             <TextBlock Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Text="Range:1~250, 5seconds"/>
             <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="btnGroupStop" Command="{Binding CmdGroupStop}" IsEnabled="{Binding IsConnect}" Content="Stop"/>
             <Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" x:Name="btnGroupSend" Command="{Binding CmdGroupSend}" IsEnabled="{Binding IsConnect}" Content="Send"/>

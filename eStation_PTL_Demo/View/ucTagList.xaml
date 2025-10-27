@@ -22,6 +22,7 @@
             <Button Content="Random" IsEnabled="False" CommandParameter="R" Command="{Binding DataContext.CmdRandomTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
             <TextBox Width="50" Text="{Binding Header.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
             <Button Content="{Binding Header.AutoTestDisplay}" IsEnabled="False" Command="{Binding CmdAutoSend}"/>
+            <Button Content="Quick Send" IsEnabled="{Binding IsConnect}" Command="{Binding CmdQuickSend}"/>
             <TextBlock Text="Group Bind"/>
             <TextBox Width="50"  Text="{Binding Header.Group, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
             <Button Content="Bind" IsEnabled="{Binding IsConnect}" CommandParameter="B" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>

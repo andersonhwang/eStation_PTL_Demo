@@ -41,6 +41,7 @@
                     <TextBlock Text="Current Round"/>
                     <TextBox Width="50" Text="{Binding Header.CurrenRound,Mode=OneWay}" IsEnabled="False"/>
                     <Button Content="{Binding Header.AutoTestDisplay}" IsEnabled="{Binding IsConnect}" Command="{Binding CmdAutoSend}"/>
+                    <Button Content="Quick Send" IsEnabled="{Binding IsConnect}" Command="{Binding CmdQuickSend}"/>
                     <CheckBox Content="Auto Register" IsChecked="{Binding DataContext.Header.AutoRegister, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
                     <Button Content="Register Test" IsEnabled="{Binding IsConnect}" Command="{Binding DataContext.CmdRegisterTest, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
                     <Button Content="Random" IsEnabled="{Binding IsConnect}" CommandParameter="R" Command="{Binding DataContext.CmdRandomTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>

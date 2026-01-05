@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace eStation_PTL_Demo.ViewModel
@@ -92,6 +93,10 @@ namespace eStation_PTL_Demo.ViewModel
         /// </summary>
         public ICommand CmdAutoSend { get; private set; }
         /// <summary>
+        /// Command - quick send
+        /// </summary>
+        public IAsyncCommand CmdQuickSend { get; private set; }
+        /// <summary>
         /// Command - menu
         /// </summary>
         public ICommand CmdMenu { get; private set; }
@@ -109,6 +114,7 @@ namespace eStation_PTL_Demo.ViewModel
             CmdRandomTags = new MyCommand(RandomTags, CanSelect);
             CmdSend = new MyAsyncCommand(SendTags, CanSend);
             CmdAutoSend = new MyCommand(AutoSendTags, CanSend);
+            CmdQuickSend = new MyAsyncCommand(QuickSendTags, CanSend);
             CmdMenu = new MyCommand(TagListMenu, CanMenu);
             CmdRegisterTest = new MyCommand(OpenRegisterTest, CanSend);
 
@@ -469,6 +475,52 @@ namespace eStation_PTL_Demo.ViewModel
                     ExportAutoTestRecords();
                 });
                 Header.AutoTest = true;
+            }
+        }
+
+        /// <summary>
+        /// Quick send tags
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
+        private async Task QuickSendTags(object parameter)
+        {
+            var lst = new List<OrderItem>();
+            foreach (var tag in Tags)
+            {
+                if (!tag.Select) continue;
+                lst.Add(new OrderItem
+                {
+                    TagID = tag.TagID,
+                    Beep = tag.Beep,
+                    Flashing = tag.Flashing,
+                    Color = GetColor(tag.R, tag.G, tag.B)
+                });
+                tag.Status = TagStatus.Sending;
+                tag.LastSend = DateTime.Now;
+                tag.SendCount++;
+                ResetTag(tag, true);
+                if (lst.Count >= 10)
+                {
+                    await SendService.Instance.Send(new Order
+                    {
+                        Time = header.Time,
+                        Items = [.. lst]
+                    });
+                    lst.Clear();
+                    await Task.Delay(200);
+                }
+            }
+            if (lst.Count > 0)
+            {
+                await SendService.Instance.Send(new Order
+                {
+                    Time = header.Time,
+                    Items = [.. lst]
+                });
+                lst.Clear();
+                await Task.Delay(200);
+
             }
         }
 

@@ -5,7 +5,7 @@ namespace eStation_PTL_Demo.Model
     public class OtaFirmware : BaseModel
     {
         private int type = 0;
-        private int version = 0;
+        private int? version = null;
         private FactoryCode factory = FactoryCode.PHY6252;
         private string md5 = string.Empty;
         private string path = string.Empty;
@@ -17,7 +17,7 @@ namespace eStation_PTL_Demo.Model
         /// <summary>
         /// Version 
         /// </summary>
-        public int Version { get => version; set { version = value; NotifyPropertyChanged(nameof(Version)); } }
+        public int? Version { get => version; set { version = value; NotifyPropertyChanged(nameof(Version)); } }
         /// <summary>
         /// Factory code
         /// </summary>

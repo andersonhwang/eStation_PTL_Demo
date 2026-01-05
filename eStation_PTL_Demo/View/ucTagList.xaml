@@ -13,23 +13,46 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="28"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Right" FlowDirection="LeftToRight" Orientation="Horizontal">
-            <CheckBox Content="Auto Register" IsChecked="{Binding DataContext.Header.AutoRegister, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
-            <CheckBox Content="Only Data" IsChecked="{Binding DataContext.Header.OnlyData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
-            <Button Content="Random" IsEnabled="False" CommandParameter="R" Command="{Binding DataContext.CmdRandomTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
-            <TextBox Width="50" Text="{Binding Header.Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-            <Button Content="{Binding Header.AutoTestDisplay}" IsEnabled="False" Command="{Binding CmdAutoSend}"/>
-            <TextBlock Text="Group Bind"/>
-            <TextBox Width="50"  Text="{Binding Header.Group, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
-            <Button Content="Bind" IsEnabled="{Binding IsConnect}" CommandParameter="B" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
-            <TextBlock Text="Time"/>
-            <TextBox Width="50" Text="{Binding Header.TimeText, Mode=TwoWay}" InputScope="Number"/>
-            <Button Content="Send" IsEnabled="{Binding IsConnect}" CommandParameter="C" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
-            <Button Content="Empty" IsEnabled="False" CommandParameter="E" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
-        </StackPanel>
+        <ScrollViewer Grid.Row="0" 
+              HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Disabled"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              CanContentScroll="False"
+              PanningMode="HorizontalOnly">
+            <Border BorderBrush="LightGray" 
+        BorderThickness="1" 
+        CornerRadius="3" 
+        Background="White"
+        Margin="5"
+        Padding="3">
+                <StackPanel HorizontalAlignment="Right" FlowDirection="LeftToRight" Orientation="Horizontal">
+                    <CheckBox Content="Random" IsEnabled="{Binding Header.AutoTest, Converter={StaticResource BoolConverter}}" IsChecked="{Binding Header.Random, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <CheckBox Content="Beep" IsEnabled="{Binding Header.AutoTest, Converter={StaticResource BoolConverter}}" IsChecked="{Binding Header.RandomBeep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Wait(s)"/>
+                    <TextBox Width="50" Text="{Binding Header.Wait, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number" IsEnabled="{Binding Header.AutoTest, Converter={StaticResource BoolConverter}}"/>
+                    <TextBlock Text="Retry"/>
+                    <TextBox Width="50" Text="{Binding Header.RetryNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number" IsEnabled="{Binding Header.AutoTest, Converter={StaticResource BoolConverter}}"/>
+                    <TextBlock Text="Rounds"/>
+                    <TextBox Width="50" Text="{Binding Header.Round, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number" IsEnabled="{Binding Header.AutoTest, Converter={StaticResource BoolConverter}}"/>
+                    <TextBlock Text="Current Round"/>
+                    <TextBox Width="50" Text="{Binding Header.CurrenRound,Mode=OneWay}" IsEnabled="False"/>
+                    <Button Content="{Binding Header.AutoTestDisplay}" IsEnabled="{Binding IsConnect}" Command="{Binding CmdAutoSend}"/>
+                    <CheckBox Content="Auto Register" IsChecked="{Binding DataContext.Header.AutoRegister, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}" />
+                    <Button Content="Register Test" IsEnabled="{Binding IsConnect}" Command="{Binding DataContext.CmdRegisterTest, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+                    <Button Content="Random" IsEnabled="{Binding IsConnect}" CommandParameter="R" Command="{Binding DataContext.CmdRandomTags, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+                    <TextBlock Text="Group Bind"/>
+                    <TextBox Width="50"  Text="{Binding Header.Group, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" InputScope="Number"/>
+                    <Button Content="Bind" IsEnabled="{Binding IsConnect}" CommandParameter="B" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+                    <TextBlock Text="Time"/>
+                    <TextBox Width="50" Text="{Binding Header.TimeText, Mode=TwoWay}" InputScope="Number"/>
+                    <Button Content="Send" IsEnabled="{Binding IsConnect}" CommandParameter="C" Command="{Binding DataContext.CmdSend, RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1}}"/>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
         <GroupBox Header="Tag List" Grid.Row="1" >
             <DataGrid x:Name="gdTagList" ItemsSource="{Binding Tags}" AllowDrop="False" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="True">
                 <DataGrid.Columns>

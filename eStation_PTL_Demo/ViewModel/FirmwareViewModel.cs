@@ -48,7 +48,7 @@ namespace eStation_PTL_Demo.ViewModel
         /// </summary>
         /// <param name="arg"></param>
         /// <returns></returns>
-        private bool CanOTA(object arg) => File.Exists(Firmware.Path) && Firmware.Version > 0;
+        private bool CanOTA(object arg) => File.Exists(Firmware.Path) && (Firmware.Version ?? 0) > 0;
 
         /// <summary>
         /// Do browse
@@ -94,7 +94,7 @@ namespace eStation_PTL_Demo.ViewModel
             {
                 Type = Firmware.Type,
                 Firmware = Firmware.Bytes,
-                Version = Firmware.Version,
+                Version = Firmware.Version ?? 0,
                 MD5 = Firmware.MD5,
                 Factory = Firmware.Factory
             });

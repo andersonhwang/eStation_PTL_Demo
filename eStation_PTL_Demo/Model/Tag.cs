@@ -46,5 +46,37 @@ namespace eStation_PTL_Demo.Model
         public string ReceiveCountDisplay { get => $"{ReceiveCount}/{SendCount}"; }
         public int Group { get => group; set { group = value; NotifyPropertyChanged(nameof(Group)); } }
         public int Type { get => type; set { type = value; NotifyPropertyChanged(nameof(Type)); } }
+
+        public Tag Clone()
+        {
+            return new Tag(this.TagID)
+            {
+                Group = this.Group,
+                Sequence = this.Sequence,
+                Status = this.Status,
+                Version = this.Version,
+                RfPower = this.RfPower,
+                Battery = this.Battery,
+                Speed = this.Speed,
+                Heartbeat = this.Heartbeat,
+                TurnOff = this.TurnOff,
+                SendCount = this.SendCount,
+                ReceiveCount = this.ReceiveCount,
+                HeartbeatCount = this.HeartbeatCount,
+                KeyCount = this.KeyCount,
+                LastSend = this.LastSend,
+                LastReceive = this.LastReceive,
+                LastHeartbeat = this.LastHeartbeat,
+                LastKey = this.LastKey,
+                Type = this.Type,
+                R = this.R,
+                G = this.G,
+                B = this.B,
+                Beep = this.Beep,
+                Flashing = this.Flashing,
+                Select = this.Select
+            };
+        }
+
     }
 }

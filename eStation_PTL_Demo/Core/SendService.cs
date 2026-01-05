@@ -22,7 +22,7 @@ namespace eStation_PTL_Demo.Core
         private CancellationTokenSource? processingCts;
         private bool isRunning = false;
         private bool isAutoRegister = false;
-        private ObservableCollection<Tag> tags = [];
+        private List<Tag> tags = [];
 
         private SendService()
         {
@@ -110,7 +110,7 @@ namespace eStation_PTL_Demo.Core
         /// Tags集合变更代理
         /// </summary>
         /// <param name="tags">标签集合</param>
-        public delegate void TagsChangedDelegate(ObservableCollection<Tag> tags);
+        public delegate void TagsChangedDelegate(List<Tag> tags);
         public event TagsChangedDelegate? TagsChangedHandler;
 
 
@@ -178,29 +178,33 @@ namespace eStation_PTL_Demo.Core
                                         break;
                                     case 0x12:
                                         var resultV1 = JsonSerializer.Deserialize<TaskResultV1>(item.PayloadSegment);
-                                        if (resultV1 is null) continue;
-                                        var tagList = tags.Select(y => y.TagID).ToHashSet();
-                                        var filterItems = isAutoRegister ? resultV1.Results : [.. resultV1.Results.Where(x => tagList.Contains(x.TagID))];
-                                        if (filterItems.Length == 0) continue;
-                                        var result = new TaskResult
+                                        if (resultV1 is null || resultV1.Results.Length == 0) continue;
+
+                                        TagResult[] items;
+                                        if (isAutoRegister)
                                         {
-                                            Items =
-                                            [..
-                                            filterItems.Select(x=>new TagResult {
-                                                TagID = x.TagID,
-                                                DataType = x.ResultType switch{
-                                                    0xFE => 1, // 通信
-                                                    0xFD => 2, // 按键
-                                                    _ => 0, // 心跳
-                                                },
-                                                Version = Int32.TryParse(x.Version,out var version) ? version : 0,
-                                                Color = x.Colors?.Length>0 ? GetColor(x.Colors[0]) : 0,
-                                                Group = x.Group,
-                                                RfPower = x.RfPowerRecv,
-                                                Voltage = x.Battery
-                                            })
-                                            ]
-                                        };
+                                            items = new TagResult[resultV1.Results.Length];
+                                            for (int i = 0; i < resultV1.Results.Length; i++)
+                                            {
+                                                items[i] = ConvertToTagResult(resultV1.Results[i]);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            var tagIdSet = GetTagIdSet();
+                                            var tempList = new List<TagResult>(resultV1.Results.Length);
+                                            foreach (var x in resultV1.Results)
+                                            {
+                                                if (tagIdSet.Contains(x.TagID))
+                                                {
+                                                    tempList.Add(ConvertToTagResult(x));
+                                                }
+                                            }
+                                            if (tempList.Count == 0) continue;
+                                            items = [.. tempList];
+                                        }
+
+                                        var result = new TaskResult { Items = items };
                                         TaskResultHandler?.Invoke(result);
                                         break;
                                     case 0x13:
@@ -378,7 +382,7 @@ namespace eStation_PTL_Demo.Core
         /// 处理Tags集合变更
         /// </summary>
         /// <param name="tags">标签集合</param>
-        public void OnTagsChanged(ObservableCollection<Tag> tags)
+        public void OnTagsChanged(List<Tag> tags)
         {
             TagsChangedHandler?.Invoke(tags);
         }
@@ -404,9 +408,21 @@ namespace eStation_PTL_Demo.Core
             this.isAutoRegister = isAutoRegister;
         }
 
-        private void HandleTagsChanged(ObservableCollection<Tag> tags)
+        private HashSet<string>? _cachedTagIds;
+
+        private void HandleTagsChanged(List<Tag> tags)
         {
             this.tags = tags;
+            _cachedTagIds = null; // 
+        }
+
+        private HashSet<string> GetTagIdSet()
+        {
+            if (_cachedTagIds == null)
+            {
+                _cachedTagIds = tags.Select(t => t.TagID).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            }
+            return _cachedTagIds;
         }
 
         /// <summary>
@@ -559,5 +575,26 @@ namespace eStation_PTL_Demo.Core
                 B = (color & 0b001) != 0
             };
         }
+
+        private static TagResult ConvertToTagResult(TagResultV1 x)
+        {
+            return new TagResult
+            {
+                TagID = x.TagID,
+                DataType = x.ResultType switch
+                {
+                    0xFE => 1,
+                    0xFD => 2,
+                    _ => 0,
+                },
+                Version = int.TryParse(x.Version, out var v) ? v : 0,
+                Color = x.Colors?.Length > 0 ? GetColor(x.Colors[0]) : 0,
+                Group = x.Group,
+                RfPower = x.RfPowerRecv,
+                Voltage = x.Battery
+            };
+        }
+
+        public List<Tag> GetTags() => [.. tags];
     }
 }

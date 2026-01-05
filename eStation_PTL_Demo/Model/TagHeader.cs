@@ -10,10 +10,20 @@
         private bool autoTest = false;
         private bool autoRegister = false;
         private bool onlyData = true;
+        private bool random = false;
+        private bool randomBeep = false;
         private int autoMode = 0;
         private int time = defaultTime;
         private int group = 0;
-        private int speed = 60;
+        private int startGroup = 0;
+        private int endGroup = 254;
+        private string startId = "00000000";
+        private string endId = "FFFFFFFF";
+        private int speed = 10;
+        private int wait = 5;
+        private int retryNumber = 0;
+        private int round = 10;
+        private int currentRound = 0;
         private int roundCount = 0;
         private int sendCount = 0;
         private int successCount = 0;
@@ -42,6 +52,7 @@
                 NotifyPropertyChanged(nameof(TimeText));
             }
         }
+
         /// <summary>
         /// Auto test
         /// </summary>
@@ -58,6 +69,8 @@
         /// Only data
         /// </summary>
         public bool OnlyData { get => onlyData; set { onlyData = value; NotifyPropertyChanged(nameof(OnlyData)); } }
+        public bool Random { get => random; set { random = value; NotifyPropertyChanged(nameof(Random)); } }
+        public bool RandomBeep { get => randomBeep; set { randomBeep = value; NotifyPropertyChanged(nameof(RandomBeep)); } }
         /// <summary>
         /// Is bind
         /// </summary>
@@ -81,10 +94,19 @@
         /// Group
         /// </summary>
         public int Group { get => group; set { group = value; NotifyPropertyChanged(nameof(Group)); } }
+        public int StartGroup { get => startGroup; set { startGroup = value; NotifyPropertyChanged(nameof(StartGroup)); } }
+        public int EndGroup { get => endGroup; set { endGroup = value; NotifyPropertyChanged(nameof(EndGroup)); } }
+        public string StartId { get => startId; set { startId = value; NotifyPropertyChanged(nameof(StartId)); } }
+        public string EndId { get => endId; set { endId = value; NotifyPropertyChanged(nameof(EndId)); } }
+
         /// <summary>
         /// Speed
         /// </summary>
         public int Speed { get => speed; set { speed = value; NotifyPropertyChanged(nameof(Speed)); } }
+        public int Wait { get => wait; set { wait = value; NotifyPropertyChanged(nameof(Wait)); } }
+        public int Round { get => round; set { round = value; NotifyPropertyChanged(nameof(Round)); } }
+        public int CurrenRound { get => currentRound; set { currentRound = value; NotifyPropertyChanged(nameof(CurrenRound)); } }
+        public int RetryNumber { get => retryNumber; set { retryNumber = value; NotifyPropertyChanged(nameof(RetryNumber)); } }
         /// <summary>
         /// Round count
         /// </summary>

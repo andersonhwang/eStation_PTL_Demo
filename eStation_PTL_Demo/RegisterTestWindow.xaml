@@ -1,0 +1,40 @@
+<Window x:Class="eStation_PTL_Demo.RegisterTestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Register Test" Height="230" Width="380" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Row 0: test auto register checkbox -->
+        <CheckBox Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,10" Content="Auto Register (Test Only)" IsChecked="{Binding TestAutoRegister, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <!-- Row 1: input target count -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,0,8,8" VerticalAlignment="Center" Text="Target Count"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,8" Width="120" HorizontalAlignment="Left"
+                 Text="{Binding TargetCountText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <!-- Row 2: received count -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,0,8,8" VerticalAlignment="Center" Text="Received"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,0,0,8" VerticalAlignment="Center" Text="{Binding ReceivedCount}"/>
+
+        <!-- Row 3: elapsed time -->
+        <TextBlock Grid.Row="3" Grid.Column="0" Margin="0,0,8,8" VerticalAlignment="Center" Text="Elapsed"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0,0,8" VerticalAlignment="Center" Text="{Binding ElapsedText}"/>
+
+        <!-- Row 4: Run/Stop button -->
+        <Button Grid.Row="4" Grid.ColumnSpan="2" Height="32" Content="{Binding RunButtonText}" Command="{Binding CmdRunStop}"/>
+    </Grid>
+</Window>

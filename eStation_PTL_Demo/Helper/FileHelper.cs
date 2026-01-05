@@ -84,6 +84,8 @@ namespace eStation_PTL_Demo.Helper
         /// <returns>MD5 value</returns>
         public static string GetBytesMd5(byte[] bytes)
         {
+            if (bytes.Length == 0) 
+                return string.Empty;
             try
             {
                 using var md5Provider = MD5.Create();

@@ -1,3 +1,17 @@
-欢迎！这是eStation灯条版本的开发者示例程序，使用C# WPF MVVM编写。
+# eStation PTL Edition
+Welcome to eStation PTL edition! 
 
-请注意：尽管这是一个开源项目，但是仅为eStation灯条版本的设备使用。
+eStation PTL edition is designed for developers to quick integerate ETAG PTL with their projects. eStation use MQTT protocol and esay to configure/integerate.
+
+Release Date: ----
+
+Firmware: ---
+
+# 1. Work with Mosquitto
+
+If you are working with Mosquitton, you need edit the Mosquitto configure file mosquitto.conf:
+```
+allow_anonymous false  
+password_file Your_Password_File_Path_Here  # Pasword file path
+listener XXXX                               # The MQTT port
+max_topic_alias 255                         # The default value is 10, need change to 255
